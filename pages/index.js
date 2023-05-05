@@ -1,4 +1,4 @@
-import TodaysCards from "./components/TodaysCards";
+import TodaysCards from "@/components/TodaysCards";
 
 export default function HomePage({ events }) {
   function getTodaysDate() {
