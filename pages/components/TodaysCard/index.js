@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { uid } from "uid";
 
 const StyledLi = styled.li`
   list-style: none;
@@ -22,7 +23,7 @@ const StyledLi = styled.li`
 export default function TodaysCard({ event }) {
   return (
     <>
-      <StyledLi key={event.id}>
+      <StyledLi>
         <h2>{event.title}</h2>
         <p>{event.time}</p>
         <p>{event.country}</p>

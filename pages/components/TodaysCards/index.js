@@ -1,3 +1,4 @@
+import { uid } from "uid";
 import TodaysCard from "../TodaysCard";
 import styled from "styled-components";
 
@@ -11,7 +12,7 @@ export default function TodaysCards({ events }) {
       <h1>Today&#96;s Events</h1>
       <StyledUl>
         {events.map((event) => {
-          return <TodaysCard key={event.id} event={event}></TodaysCard>;
+          return <TodaysCard key={uid()} event={event}></TodaysCard>;
         })}
       </StyledUl>
     </>
