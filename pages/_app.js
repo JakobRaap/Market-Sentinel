@@ -101,7 +101,6 @@ export default function App({ Component, pageProps }) {
         event.weekday = getDayOfWeek(event.date);
         return event;
       });
-      console.log(eventsWithWeekdays);
       setEvents(eventsWithWeekdays);
     });
   }, []);
