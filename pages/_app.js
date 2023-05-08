@@ -9,7 +9,7 @@ async function parseXML(xml) {
   return json;
 }
 function getDayOfWeek(dateString) {
-  //formatting date from mm-dd-yyyy to yyyy-mm-dd
+  //this function turns a date string into its weekday
   const [month, day, year] = dateString.split("-");
   const date = new Date(`${year}-${month}-${day}`);
   const options = { weekday: "long" };
