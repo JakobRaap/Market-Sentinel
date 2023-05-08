@@ -9,7 +9,10 @@ export default function WeeklyCard({ event }) {
     <StyledLi>
       <p>{event.time}</p>
       <p>{event.title}</p>
-      <p>{event.country}</p>
+      <p>
+        {event.country}
+        {event.flag}
+      </p>
       <p>{event.impact}</p>
     </StyledLi>
   );

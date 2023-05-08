@@ -40,17 +40,54 @@ async function fetchThisWeekAndReturnArray() {
   return formatedArray;
 }
 
+function addCountryFlagsToArray(events) {
+  const updatedEvents = events.map((event) => {
+    if (event.country === "USD") {
+      event.flag = "🇺🇸";
+      return event;
+    } else if (event.country === "EUR") {
+      event.flag = "🇪🇺";
+      return event;
+    } else if (event.country === "GBP") {
+      event.flag = "🇬🇧";
+      return event;
+    } else if (event.country === "AUD") {
+      event.flag = "🇦🇺";
+      return event;
+    } else if (event.country === "CAD") {
+      event.flag = "🇨🇦";
+      return event;
+    } else if (event.country === "NZD") {
+      event.flag = "🇳🇿";
+      return event;
+    } else if (event.country === "CHF") {
+      event.flag = "🇨🇭";
+      return event;
+    } else if (event.country === "JPY") {
+      event.flag = "🇯🇵";
+      return event;
+    } else if (event.country === "CNY") {
+      event.flag = "🇨🇳";
+      return event;
+    }
+
+    return event;
+  });
+  return updatedEvents;
+}
+
 export default function App({ Component, pageProps }) {
   const [events, setEvents] = useState([]);
 
   useEffect(() => {
     fetchThisWeekAndReturnArray().then((data) => {
-      //Add weekday to each event
+      //Add weekday and country flag to each event
       const eventsWithWeekdays = data.map((event) => {
         event.weekday = getDayOfWeek(event.date);
         return event;
       });
-      setEvents(eventsWithWeekdays);
+      const eventsWithFlags = addCountryFlagsToArray(eventsWithWeekdays);
+      setEvents(eventsWithFlags);
     });
   }, []);
 
