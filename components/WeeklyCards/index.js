@@ -9,10 +9,15 @@ const StyledUl = styled.ul`
 
 export default function WeeklyCards({ events }) {
   return (
-    <StyledUl>
-      {events.map((event) => {
-        return <WeeklyCard key={uid()} event={event}></WeeklyCard>;
-      })}
-    </StyledUl>
+    <>
+      <h4>
+        {events[0].weekday} {events[0].date}
+      </h4>
+      <StyledUl>
+        {events.map((event) => {
+          return <WeeklyCard key={uid()} event={event}></WeeklyCard>;
+        })}
+      </StyledUl>
+    </>
   );
 }
