@@ -2,58 +2,7 @@ import { useEffect } from "react";
 import GlobalStyle from "../styles";
 import { useState } from "react";
 const xml2js = require("xml2js");
-const startingData = [
-  {
-    country: "AUD",
-    date: "05-08-2023",
-    forecast: "3.0%",
-    impact: "Low",
-    previous: "4.0%",
-    time: "1:30am",
-    title: "Building Approvals m/m",
-    weekday: "Monday",
-  },
-  {
-    country: "AUD",
-    date: "05-09-2023",
-    forecast: "3.0%",
-    impact: "Low",
-    previous: "4.0%",
-    time: "1:30am",
-    title: "Building Approvals m/m",
-    weekday: "Monday",
-  },
-  {
-    country: "AUD",
-    date: "05-10-2023",
-    forecast: "3.0%",
-    impact: "Low",
-    previous: "4.0%",
-    time: "1:30am",
-    title: "Building Approvals m/m",
-    weekday: "Monday",
-  },
-  {
-    country: "AUD",
-    date: "05-11-2023",
-    forecast: "3.0%",
-    impact: "Low",
-    previous: "4.0%",
-    time: "1:30am",
-    title: "Building Approvals m/m",
-    weekday: "Monday",
-  },
-  {
-    country: "AUD",
-    date: "05-12-2023",
-    forecast: "3.0%",
-    impact: "Low",
-    previous: "4.0%",
-    time: "1:30am",
-    title: "Building Approvals m/m",
-    weekday: "Monday",
-  },
-];
+
 async function parseXML(xml) {
   const parser = new xml2js.Parser();
   const json = await parser.parseStringPromise(xml);
