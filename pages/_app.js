@@ -2,7 +2,17 @@ import { useEffect } from "react";
 import GlobalStyle from "../styles";
 import { useState } from "react";
 const xml2js = require("xml2js");
-
+const countryFlags = {
+  USD: "🇺🇸",
+  EUR: "🇪🇺",
+  GBP: "🇬🇧",
+  AUD: "🇦🇺",
+  CAD: "🇨🇦",
+  NZD: "🇳🇿",
+  CHF: "🇨🇭",
+  JPY: "🇯🇵",
+  CNY: "🇨🇳",
+};
 async function parseXML(xml) {
   const parser = new xml2js.Parser();
   const json = await parser.parseStringPromise(xml);
@@ -40,38 +50,9 @@ async function fetchThisWeekAndReturnArray() {
   return formatedArray;
 }
 
-function addCountryFlagsToArray(events) {
+function addCountryFlags(events) {
   const updatedEvents = events.map((event) => {
-    if (event.country === "USD") {
-      event.flag = "🇺🇸";
-      return event;
-    } else if (event.country === "EUR") {
-      event.flag = "🇪🇺";
-      return event;
-    } else if (event.country === "GBP") {
-      event.flag = "🇬🇧";
-      return event;
-    } else if (event.country === "AUD") {
-      event.flag = "🇦🇺";
-      return event;
-    } else if (event.country === "CAD") {
-      event.flag = "🇨🇦";
-      return event;
-    } else if (event.country === "NZD") {
-      event.flag = "🇳🇿";
-      return event;
-    } else if (event.country === "CHF") {
-      event.flag = "🇨🇭";
-      return event;
-    } else if (event.country === "JPY") {
-      event.flag = "🇯🇵";
-      return event;
-    } else if (event.country === "CNY") {
-      event.flag = "🇨🇳";
-      return event;
-    }
-
-    return event;
+    return { ...event, flag: countryFlags[event.country] };
   });
   return updatedEvents;
 }
@@ -86,7 +67,7 @@ export default function App({ Component, pageProps }) {
         event.weekday = getDayOfWeek(event.date);
         return event;
       });
-      const eventsWithFlags = addCountryFlagsToArray(eventsWithWeekdays);
+      const eventsWithFlags = addCountryFlags(eventsWithWeekdays);
       setEvents(eventsWithFlags);
     });
   }, []);
