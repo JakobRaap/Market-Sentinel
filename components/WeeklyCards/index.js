@@ -4,7 +4,7 @@ import { uid } from "uid";
 const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
-  padding: 3%;
+  padding: 20px;
 `;
 
 export default function WeeklyCards({ events }) {
