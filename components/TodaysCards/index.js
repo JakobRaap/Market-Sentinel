@@ -2,7 +2,7 @@ import { uid } from "uid";
 import TodaysCard from "../TodaysCard";
 import styled from "styled-components";
 
-const StyledUl = styled.ul`
+const StyledList = styled.ul`
   padding: 30px;
 `;
 
@@ -10,11 +10,11 @@ export default function TodaysCards({ events }) {
   return (
     <>
       <h1>Today&#96;s Events</h1>
-      <StyledUl>
+      <StyledList>
         {events.map((event) => {
           return <TodaysCard key={uid()} event={event}></TodaysCard>;
         })}
-      </StyledUl>
+      </StyledList>
     </>
   );
 }
