@@ -1,10 +1,16 @@
+import Link from "next/link";
 import styled from "styled-components";
 import { uid } from "uid";
 
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`;
 const StyledList = styled.li`
   list-style: none;
   border: 1px solid black;
   margin: 2px;
+  transition: 0.2s;
   h2 {
     font-size: 1rem;
     margin-left: 5px;
@@ -18,17 +24,24 @@ const StyledList = styled.li`
     margin: 2px;
     margin-left: 8px;
   }
+  &:hover {
+    background-color: lightslategray;
+  }
 `;
 
 export default function TodaysCard({ event }) {
   return (
     <>
-      <StyledList>
-        <h2>{event.title}</h2>
-        <p>{event.time}</p>
-        <p>{event.country}</p>
-        <p>{event.impact}</p>
-      </StyledList>
+      <StyledLink href={`/events/${event.id}`}>
+        <StyledList>
+          <h2>{event.title}</h2>
+          <p>{event.time}</p>
+          <p>
+            {event.country} {event.flag}
+          </p>
+          <p>{event.impact}</p>
+        </StyledList>
+      </StyledLink>
     </>
   );
 }

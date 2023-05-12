@@ -32,14 +32,15 @@ export default async function fetchThisWeek(request, response) {
   );
   const xml = await fetchResponse.text();
   const json = await parseXML(xml);
-
+  let id = 1;
   const events = json.weeklyevents.event.map((eventFromXML) => {
     // formatting the array to get rid of the nested arrays
     const event = {};
     for (const key in eventFromXML) {
       event[key] = eventFromXML[key][0];
     }
-
+    event.id = id;
+    id = id + 1;
     event.flag = countryFlags[event.country];
     event.weekday = getDayOfWeek(event.date);
 
