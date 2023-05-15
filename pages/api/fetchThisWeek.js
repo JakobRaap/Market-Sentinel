@@ -1,5 +1,5 @@
 import xml2js from "xml2js";
-
+import hash from "object-hash";
 async function parseXML(xml) {
   const parser = new xml2js.Parser();
   const json = await parser.parseStringPromise(xml);
@@ -32,15 +32,14 @@ export default async function fetchThisWeek(request, response) {
   );
   const xml = await fetchResponse.text();
   const json = await parseXML(xml);
-  let id = 1;
   const events = json.weeklyevents.event.map((eventFromXML) => {
     // formatting the array to get rid of the nested arrays
     const event = {};
     for (const key in eventFromXML) {
       event[key] = eventFromXML[key][0];
     }
+    const id = hash(event);
     event.id = id;
-    id = id + 1;
     event.flag = countryFlags[event.country];
     event.weekday = getDayOfWeek(event.date);
 

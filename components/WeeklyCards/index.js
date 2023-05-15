@@ -5,14 +5,19 @@ const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
   padding: 20px;
+  padding-top: 0;
+  list-style: none;
+`;
+const StyledDateHeading = styled.h4`
+  padding-left: 20px;
 `;
 
 export default function WeeklyCards({ events }) {
   return (
     <>
-      <h4>
+      <StyledDateHeading>
         {events[0].weekday} {events[0].date}
-      </h4>
+      </StyledDateHeading>
       <StyledList>
         {events.map((event) => {
           return <WeeklyCard key={uid()} event={event}></WeeklyCard>;

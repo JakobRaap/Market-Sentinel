@@ -16,7 +16,7 @@ export default function EventDetails({ events }) {
   const { id } = router.query;
 
   const event = events.find((event) => {
-    return event.id === parseInt(id);
+    return event.id === id;
   });
 
   if (!event) {
