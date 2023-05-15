@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const StyledList = styled.ul`
   padding: 30px;
+  list-style: none;
 `;
 
 export default function TodaysCards({ events }) {
