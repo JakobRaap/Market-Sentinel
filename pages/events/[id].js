@@ -22,6 +22,7 @@ export default function EventDetails({ events }) {
   if (!event) {
     return null;
   }
+
   return (
     <>
       <button onClick={() => router.back()}>🔙</button>
@@ -42,7 +43,6 @@ export default function EventDetails({ events }) {
           Forecast: {event.forecast ? event.forecast : "unknown"}
         </StyledListItem>
       </StyledList>
-      <p></p>
     </>
   );
 }

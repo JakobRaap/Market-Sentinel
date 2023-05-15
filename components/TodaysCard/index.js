@@ -6,7 +6,7 @@ const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: none;
 `;
-const StyledList = styled.li`
+const StyledListItem = styled.li`
   border: 1px solid black;
   margin: 2px;
   transition: background-color 0.2s;
@@ -31,16 +31,17 @@ const StyledList = styled.li`
 export default function TodaysCard({ event }) {
   return (
     <>
-      <StyledList>
+      <StyledListItem>
         <StyledLink href={`/events/${event.id}`}>
           <h2>{event.title}</h2>
+
           <p>{event.time}</p>
           <p>
             {event.country} {event.flag}
           </p>
           <p>{event.impact}</p>
         </StyledLink>
-      </StyledList>
+      </StyledListItem>
     </>
   );
 }
