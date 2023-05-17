@@ -26,7 +26,7 @@ export default function EventDetails({ events }) {
 
   return (
     <>
-      <CalendarNavigationBar></CalendarNavigationBar>
+      <CalendarNavigationBar />
       <h2>{event.title}</h2>
       <StyledList>
         <StyledListItem>

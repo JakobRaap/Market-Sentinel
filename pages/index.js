@@ -17,12 +17,12 @@ export default function HomePage({ events, onToggleAlarm }) {
 
   return (
     <div>
-      <CalendarNavigationBar></CalendarNavigationBar>
+      <CalendarNavigationBar />
       <TodaysCards
         events={todaysEvents}
         onToggleAlarm={onToggleAlarm}
       ></TodaysCards>
-      <NavigationBar></NavigationBar>
+      <NavigationBar />
     </div>
   );
 }

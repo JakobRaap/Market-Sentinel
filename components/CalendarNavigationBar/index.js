@@ -8,21 +8,17 @@ const StyledHeader = styled.header`
   text-align: center;
   border-bottom: 1px solid black;
 `;
-const StyledLinkWithRightBorder = styled(Link)`
-  border-right: 1px solid black;
-  color: inherit;
-  text-decoration: none;
-`;
 const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: none;
+  ${(props) => props.withborder && `border-right: 1px solid black;`}
 `;
 export default function CalendarNavigationBar() {
   return (
     <StyledHeader>
-      <StyledLinkWithRightBorder href={"/"}>
+      <StyledLink withborder="true" href={"/"}>
         Todays Events
-      </StyledLinkWithRightBorder>
+      </StyledLink>
       <StyledLink href={"/thisWeek"}>This Weeks Events</StyledLink>
     </StyledHeader>
   );

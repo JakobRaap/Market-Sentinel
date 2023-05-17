@@ -13,7 +13,7 @@ const StyledFooter = styled.footer`
   background-color: white;
   margin-left: 70px;
   margin-right: 70px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
 `;
 const StyledImage = styled(Image)`
   border: 2px solid black;
@@ -30,16 +30,16 @@ export default function NavigationBar() {
           src="/calendar.png"
           width={50}
           height={50}
-          alt="img not found:("
-        ></StyledImage>
+          alt="Calendar navigationbar icon"
+        />
       </Link>
       <Link href="/alarms">
         <StyledImage
           src="/alarm_toggled.png"
           width={50}
           height={50}
-          alt="img not found:("
-        ></StyledImage>
+          alt="Toggled alarms navigationbar icon"
+        />
       </Link>
     </StyledFooter>
   );

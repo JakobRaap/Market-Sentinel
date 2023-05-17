@@ -34,29 +34,29 @@ export default function ThisWeek({ events, onToggleAlarm }) {
 
   return (
     <>
-      <CalendarNavigationBar></CalendarNavigationBar>
+      <CalendarNavigationBar />
       <h1>This Week&#96;s Events</h1>
       <WeeklyCards
         events={weekdayEvents.monday}
         onToggleAlarm={onToggleAlarm}
-      ></WeeklyCards>
+      />
       <WeeklyCards
         events={weekdayEvents.tuesday}
         onToggleAlarm={onToggleAlarm}
-      ></WeeklyCards>
+      />
       <WeeklyCards
         events={weekdayEvents.wednesday}
         onToggleAlarm={onToggleAlarm}
-      ></WeeklyCards>
+      />
       <WeeklyCards
         events={weekdayEvents.thursday}
         onToggleAlarm={onToggleAlarm}
-      ></WeeklyCards>
+      />
       <WeeklyCards
         events={weekdayEvents.friday}
         onToggleAlarm={onToggleAlarm}
-      ></WeeklyCards>
-      <NavigationBar></NavigationBar>
+      />
+      <NavigationBar />
     </>
   );
 }

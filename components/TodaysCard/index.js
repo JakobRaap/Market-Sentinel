@@ -42,11 +42,12 @@ export default function TodaysCard({ event, onToggleAlarm }) {
         </StyledLink>
         <Image
           onClick={() => onToggleAlarm(event.id)}
-          alt="img not found :("
+          alt="Alarmclock icon for toggling alarm on or off"
+          className="alarm-icon"
           src={event.alarm ? "/alarm_toggled.png" : "/alarm_untoggled.png"}
           width={27}
           height={27}
-        ></Image>
+        />
       </StyledListItem>
     </>
   );

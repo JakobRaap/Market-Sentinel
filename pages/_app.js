@@ -6,8 +6,8 @@ import useLocalStorageState from "use-local-storage-state";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
-  const [eventsArray, setEventsArray] = useState([]);
-  const [alarmsArray, setAlarmsArray] = useLocalStorageState("events", {
+  const [newsEvents, setNewsEvents] = useState([]);
+  const [alarmEvents, setAlarmEvents] = useLocalStorageState("events", {
     defaultValue: [],
   });
   const { data: events } = useSWR("/api/fetchThisWeek", fetcher);
@@ -16,33 +16,32 @@ export default function App({ Component, pageProps }) {
     // update events array with alarm info
     if (events) {
       const updatedEventsArray = events.map((event) => {
-        const updatedEvent = alarmsArray.find((alarm) => alarm.id === event.id);
+        const updatedEvent = alarmEvents.find((alarm) => alarm.id === event.id);
         if (updatedEvent) {
           return { ...event, alarm: updatedEvent.alarm };
         }
         return event;
       });
-      setEventsArray(updatedEventsArray);
+      setNewsEvents(updatedEventsArray);
     }
-  }, [events, alarmsArray]);
+  }, [events, alarmEvents]);
 
   function handleToggleAlarm(id) {
-    const updatedEvents = eventsArray.map((event) => {
+    const updatedEvents = newsEvents.map((event) => {
       if (event.id === id) {
         return { ...event, alarm: !event.alarm };
       }
       return event;
     });
-
-    setAlarmsArray(updatedEvents);
-    setEventsArray(updatedEvents);
+    setAlarmEvents(updatedEvents);
+    setNewsEvents(updatedEvents);
   }
   return (
     <>
       <GlobalStyle />
       <Component
         {...pageProps}
-        events={eventsArray ?? []}
+        events={newsEvents ?? []}
         onToggleAlarm={handleToggleAlarm}
       />
     </>
