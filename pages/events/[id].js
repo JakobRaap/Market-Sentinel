@@ -1,3 +1,4 @@
+import CalendarNavigationBar from "@/components/CalendarNavigationBar";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -25,7 +26,7 @@ export default function EventDetails({ events }) {
 
   return (
     <>
-      <button onClick={() => router.back()}>🔙</button>
+      <CalendarNavigationBar></CalendarNavigationBar>
       <h2>{event.title}</h2>
       <StyledList>
         <StyledListItem>
