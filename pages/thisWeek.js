@@ -1,3 +1,5 @@
+import CalendarNavigationBar from "@/components/CalendarNavigationBar";
+import NavigationBar from "@/components/NavigationBar";
 import WeeklyCards from "@/components/WeeklyCards";
 import Link from "next/link";
 
@@ -31,8 +33,8 @@ export default function ThisWeek({ events, onToggleAlarm }) {
   const weekdayEvents = getEachDaysEvents();
 
   return (
-    <div>
-      <Link href={"/"}>View todays events</Link>
+    <>
+      <CalendarNavigationBar></CalendarNavigationBar>
       <h1>This Week&#96;s Events</h1>
       <WeeklyCards
         events={weekdayEvents.monday}
@@ -54,6 +56,7 @@ export default function ThisWeek({ events, onToggleAlarm }) {
         events={weekdayEvents.friday}
         onToggleAlarm={onToggleAlarm}
       ></WeeklyCards>
-    </div>
+      <NavigationBar></NavigationBar>
+    </>
   );
 }

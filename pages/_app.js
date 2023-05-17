@@ -13,6 +13,7 @@ export default function App({ Component, pageProps }) {
   const { data: events } = useSWR("/api/fetchThisWeek", fetcher);
 
   useEffect(() => {
+    // update events array with alarm info
     if (events) {
       const updatedEventsArray = events.map((event) => {
         const updatedEvent = alarmsArray.find((alarm) => alarm.id === event.id);
@@ -23,7 +24,7 @@ export default function App({ Component, pageProps }) {
       });
       setEventsArray(updatedEventsArray);
     }
-  }, [events]);
+  }, [events, alarmsArray]);
 
   function handleToggleAlarm(id) {
     const updatedEvents = eventsArray.map((event) => {

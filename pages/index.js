@@ -1,6 +1,6 @@
+import CalendarNavigationBar from "@/components/CalendarNavigationBar";
 import NavigationBar from "@/components/NavigationBar";
 import TodaysCards from "@/components/TodaysCards";
-import Link from "next/link";
 
 export default function HomePage({ events, onToggleAlarm }) {
   function getTodaysDate() {
@@ -17,8 +17,7 @@ export default function HomePage({ events, onToggleAlarm }) {
 
   return (
     <div>
-      <Link href={"/thisWeek"}>View this weeks events</Link>
-      <Link href={"/alarms"}>View active alarms</Link>
+      <CalendarNavigationBar></CalendarNavigationBar>
       <TodaysCards
         events={todaysEvents}
         onToggleAlarm={onToggleAlarm}
