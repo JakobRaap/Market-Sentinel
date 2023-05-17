@@ -12,7 +12,7 @@ const StyledDateHeading = styled.h4`
   padding-left: 20px;
 `;
 
-export default function WeeklyCards({ events }) {
+export default function WeeklyCards({ events, onToggleAlarm }) {
   return (
     <>
       <StyledDateHeading>
@@ -20,7 +20,13 @@ export default function WeeklyCards({ events }) {
       </StyledDateHeading>
       <StyledList>
         {events.map((event) => {
-          return <WeeklyCard key={uid()} event={event}></WeeklyCard>;
+          return (
+            <WeeklyCard
+              key={uid()}
+              event={event}
+              onToggleAlarm={onToggleAlarm}
+            ></WeeklyCard>
+          );
         })}
       </StyledList>
     </>

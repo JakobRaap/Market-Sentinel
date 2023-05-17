@@ -1,7 +1,7 @@
 import WeeklyCards from "@/components/WeeklyCards";
 import Link from "next/link";
 
-export default function ThisWeek({ events }) {
+export default function ThisWeek({ events, onToggleAlarm }) {
   //prevent the hydration error on refresh
   if (!events || events.length === 0) {
     return;
@@ -34,11 +34,26 @@ export default function ThisWeek({ events }) {
     <div>
       <Link href={"/"}>View todays events</Link>
       <h1>This Week&#96;s Events</h1>
-      <WeeklyCards events={weekdayEvents.monday}></WeeklyCards>
-      <WeeklyCards events={weekdayEvents.tuesday}></WeeklyCards>
-      <WeeklyCards events={weekdayEvents.wednesday}></WeeklyCards>
-      <WeeklyCards events={weekdayEvents.thursday}></WeeklyCards>
-      <WeeklyCards events={weekdayEvents.friday}></WeeklyCards>
+      <WeeklyCards
+        events={weekdayEvents.monday}
+        onToggleAlarm={onToggleAlarm}
+      ></WeeklyCards>
+      <WeeklyCards
+        events={weekdayEvents.tuesday}
+        onToggleAlarm={onToggleAlarm}
+      ></WeeklyCards>
+      <WeeklyCards
+        events={weekdayEvents.wednesday}
+        onToggleAlarm={onToggleAlarm}
+      ></WeeklyCards>
+      <WeeklyCards
+        events={weekdayEvents.thursday}
+        onToggleAlarm={onToggleAlarm}
+      ></WeeklyCards>
+      <WeeklyCards
+        events={weekdayEvents.friday}
+        onToggleAlarm={onToggleAlarm}
+      ></WeeklyCards>
     </div>
   );
 }
