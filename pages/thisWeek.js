@@ -34,7 +34,7 @@ export default function ThisWeek({ events, onToggleAlarm }) {
 
   return (
     <>
-      <CalendarNavigationBar />
+      <CalendarNavigationBar page="thisWeek" />
       <h1>This Week&#96;s Events</h1>
       <WeeklyCards
         events={weekdayEvents.monday}
