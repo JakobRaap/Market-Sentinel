@@ -1,6 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
-import { uid } from "uid";
 
 const StyledLink = styled(Link)`
   color: inherit;
@@ -28,19 +28,26 @@ const StyledListItem = styled.li`
   }
 `;
 
-export default function TodaysCard({ event }) {
+export default function TodaysCard({ event, onToggleAlarm }) {
   return (
     <>
       <StyledListItem>
         <StyledLink href={`/events/${event.id}`}>
           <h2>{event.title}</h2>
-
           <p>{event.time}</p>
           <p>
             {event.country} {event.flag}
           </p>
           <p>{event.impact}</p>
         </StyledLink>
+        <Image
+          onClick={() => onToggleAlarm(event.id)}
+          alt="Alarmclock icon for toggling alarm on or off"
+          className="alarm-icon"
+          src={event.alarm ? "/alarm_toggled.png" : "/alarm_untoggled.png"}
+          width={27}
+          height={27}
+        />
       </StyledListItem>
     </>
   );

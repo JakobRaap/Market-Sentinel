@@ -1,44 +1,41 @@
+import CalendarNavigationBar from "@/components/CalendarNavigationBar";
+import NavigationBar from "@/components/NavigationBar";
 import WeeklyCards from "@/components/WeeklyCards";
 import Link from "next/link";
 
-export default function ThisWeek({ events }) {
+export default function ThisWeek({ events, onToggleAlarm, getEachDaysEvents }) {
   //prevent the hydration error on refresh
   if (!events || events.length === 0) {
     return;
   }
 
-  function getEachDaysEvents() {
-    const weekdayEvents = {};
-    weekdayEvents.monday = events.filter((event) => {
-      return event.weekday === "Monday";
-    });
-    weekdayEvents.tuesday = events.filter((event) => {
-      return event.weekday === "Tuesday";
-    });
-    weekdayEvents.wednesday = events.filter((event) => {
-      return event.weekday === "Wednesday";
-    });
-    weekdayEvents.thursday = events.filter((event) => {
-      return event.weekday === "Thursday";
-    });
-    weekdayEvents.friday = events.filter((event) => {
-      return event.weekday === "Friday";
-    });
-
-    return weekdayEvents;
-  }
-
-  const weekdayEvents = getEachDaysEvents();
+  const weekdayEvents = getEachDaysEvents(events);
 
   return (
-    <div>
-      <Link href={"/"}>View todays events</Link>
+    <>
+      <CalendarNavigationBar page="thisWeek" />
       <h1>This Week&#96;s Events</h1>
-      <WeeklyCards events={weekdayEvents.monday}></WeeklyCards>
-      <WeeklyCards events={weekdayEvents.tuesday}></WeeklyCards>
-      <WeeklyCards events={weekdayEvents.wednesday}></WeeklyCards>
-      <WeeklyCards events={weekdayEvents.thursday}></WeeklyCards>
-      <WeeklyCards events={weekdayEvents.friday}></WeeklyCards>
-    </div>
+      <WeeklyCards
+        events={weekdayEvents.monday}
+        onToggleAlarm={onToggleAlarm}
+      />
+      <WeeklyCards
+        events={weekdayEvents.tuesday}
+        onToggleAlarm={onToggleAlarm}
+      />
+      <WeeklyCards
+        events={weekdayEvents.wednesday}
+        onToggleAlarm={onToggleAlarm}
+      />
+      <WeeklyCards
+        events={weekdayEvents.thursday}
+        onToggleAlarm={onToggleAlarm}
+      />
+      <WeeklyCards
+        events={weekdayEvents.friday}
+        onToggleAlarm={onToggleAlarm}
+      />
+      <NavigationBar />
+    </>
   );
 }

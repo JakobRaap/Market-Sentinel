@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@next/font": "^13.3.0",
+    "alarm": "^2.0.0",
+    "alarms": "^0.0.1",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "next": "13.3.0",
@@ -20,6 +22,7 @@
     "styled-components": "^5.3.9",
     "swr": "^2.1.5",
     "uid": "^2.0.2",
+    "use-local-storage-state": "^18.3.2",
     "xml2js": "^0.5.0"
   },
   "devDependencies": {

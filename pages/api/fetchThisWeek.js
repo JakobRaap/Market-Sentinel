@@ -42,6 +42,7 @@ export default async function fetchThisWeek(request, response) {
     event.id = id;
     event.flag = countryFlags[event.country];
     event.weekday = getDayOfWeek(event.date);
+    event.alarm = false;
 
     return event;
   });

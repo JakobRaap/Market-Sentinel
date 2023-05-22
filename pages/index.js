@@ -1,7 +1,8 @@
+import CalendarNavigationBar from "@/components/CalendarNavigationBar";
+import NavigationBar from "@/components/NavigationBar";
 import TodaysCards from "@/components/TodaysCards";
-import Link from "next/link";
-
-export default function HomePage({ events }) {
+var alarm = require("alarm");
+export default function HomePage({ events, onToggleAlarm }) {
   function getTodaysDate() {
     const today = new Date();
     const month = (today.getMonth() + 1).toString().padStart(2, "0");
@@ -14,11 +15,23 @@ export default function HomePage({ events }) {
     return event.date === getTodaysDate();
   });
 
+  function handleAlarm() {
+    var now = new Date();
+    var date = new Date(+now + 2000);
+    alarm(date, function () {
+      console.log("Hello, world!");
+    });
+  }
+
   return (
     <div>
-      <Link href={"/thisWeek"}>View this weeks events</Link>
-
-      <TodaysCards events={todaysEvents}></TodaysCards>
+      <CalendarNavigationBar page="today" />
+      <button onClick={handleAlarm}> Alarm</button>
+      <TodaysCards
+        events={todaysEvents}
+        onToggleAlarm={onToggleAlarm}
+      ></TodaysCards>
+      <NavigationBar />
     </div>
   );
 }
