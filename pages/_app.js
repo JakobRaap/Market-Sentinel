@@ -26,6 +26,27 @@ export default function App({ Component, pageProps }) {
     }
   }, [events, alarmEvents]);
 
+  function getEachDaysEvents(events) {
+    const weekdayEvents = {};
+    weekdayEvents.monday = events.filter((event) => {
+      return event.weekday === "Monday";
+    });
+    weekdayEvents.tuesday = events.filter((event) => {
+      return event.weekday === "Tuesday";
+    });
+    weekdayEvents.wednesday = events.filter((event) => {
+      return event.weekday === "Wednesday";
+    });
+    weekdayEvents.thursday = events.filter((event) => {
+      return event.weekday === "Thursday";
+    });
+    weekdayEvents.friday = events.filter((event) => {
+      return event.weekday === "Friday";
+    });
+
+    return weekdayEvents;
+  }
+
   function handleToggleAlarm(id) {
     const updatedEvents = newsEvents.map((event) => {
       if (event.id === id) {
@@ -43,6 +64,7 @@ export default function App({ Component, pageProps }) {
         {...pageProps}
         events={newsEvents ?? []}
         onToggleAlarm={handleToggleAlarm}
+        getEachDaysEvents={getEachDaysEvents}
       />
     </>
   );

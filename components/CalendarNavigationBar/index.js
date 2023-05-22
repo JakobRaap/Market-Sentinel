@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 const StyledHeader = styled.header`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -14,24 +14,24 @@ const StyledLink = styled(Link)`
   padding: 10px;
   ${(props) => props.withborder && `border-right: 1px solid black;`}
   ${(props) =>
-    props.isactive &&
-    `
-    font-weight: bold;
-    background-color: #ccc;
-  `}
+    props.active &&
+    css`
+      font-weight: bold;
+      background-color: #ccc;
+    `}
 `;
 export default function CalendarNavigationBar({ page }) {
   return (
     <StyledHeader>
       <StyledLink
-        isactive={page === "today" ? true : false}
+        active={page === "today" ? true : false}
         withborder="true"
         href={"/"}
       >
         Todays Events
       </StyledLink>
       <StyledLink
-        isactive={page === "thisWeek" ? true : false}
+        active={page === "thisWeek" ? true : false}
         href={"/thisWeek"}
       >
         This Weeks Events

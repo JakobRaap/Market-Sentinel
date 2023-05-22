@@ -1,4 +1,5 @@
 import CalendarNavigationBar from "@/components/CalendarNavigationBar";
+import NavigationBar from "@/components/NavigationBar";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -44,6 +45,7 @@ export default function EventDetails({ events }) {
           Forecast: {event.forecast ? event.forecast : "unknown"}
         </StyledListItem>
       </StyledList>
+      <NavigationBar />
     </>
   );
 }

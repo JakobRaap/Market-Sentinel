@@ -7,7 +7,7 @@ const StyledLink = styled(Link)`
 `;
 const StyledListItem = styled.li`
   display: grid;
-  grid-template-columns: 1fr 4fr 1fr 1fr 1fr;
+  grid-template-columns: 1.5fr 4fr 1fr 1fr 1fr;
   align-items: center;
   font-size: 0.6rem;
   border-radius: 4px;

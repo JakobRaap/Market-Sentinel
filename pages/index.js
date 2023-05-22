@@ -1,7 +1,7 @@
 import CalendarNavigationBar from "@/components/CalendarNavigationBar";
 import NavigationBar from "@/components/NavigationBar";
 import TodaysCards from "@/components/TodaysCards";
-
+var alarm = require("alarm");
 export default function HomePage({ events, onToggleAlarm }) {
   function getTodaysDate() {
     const today = new Date();
@@ -15,9 +15,18 @@ export default function HomePage({ events, onToggleAlarm }) {
     return event.date === getTodaysDate();
   });
 
+  function handleAlarm() {
+    var now = new Date();
+    var date = new Date(+now + 2000);
+    alarm(date, function () {
+      console.log("Hello, world!");
+    });
+  }
+
   return (
     <div>
       <CalendarNavigationBar page="today" />
+      <button onClick={handleAlarm}> Alarm</button>
       <TodaysCards
         events={todaysEvents}
         onToggleAlarm={onToggleAlarm}

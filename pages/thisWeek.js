@@ -3,34 +3,13 @@ import NavigationBar from "@/components/NavigationBar";
 import WeeklyCards from "@/components/WeeklyCards";
 import Link from "next/link";
 
-export default function ThisWeek({ events, onToggleAlarm }) {
+export default function ThisWeek({ events, onToggleAlarm, getEachDaysEvents }) {
   //prevent the hydration error on refresh
   if (!events || events.length === 0) {
     return;
   }
 
-  function getEachDaysEvents() {
-    const weekdayEvents = {};
-    weekdayEvents.monday = events.filter((event) => {
-      return event.weekday === "Monday";
-    });
-    weekdayEvents.tuesday = events.filter((event) => {
-      return event.weekday === "Tuesday";
-    });
-    weekdayEvents.wednesday = events.filter((event) => {
-      return event.weekday === "Wednesday";
-    });
-    weekdayEvents.thursday = events.filter((event) => {
-      return event.weekday === "Thursday";
-    });
-    weekdayEvents.friday = events.filter((event) => {
-      return event.weekday === "Friday";
-    });
-
-    return weekdayEvents;
-  }
-
-  const weekdayEvents = getEachDaysEvents();
+  const weekdayEvents = getEachDaysEvents(events);
 
   return (
     <>
