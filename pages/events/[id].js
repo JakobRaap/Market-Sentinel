@@ -23,6 +23,13 @@ export default function EventDetails({ events }) {
     return null;
   }
 
+  const icsQuery = new URLSearchParams({
+    title: `[Economic Calendar] ${event.title}`,
+    start: `${event.date} ${event.time}`,
+    duration: 30,
+    description: `Impact: ${event.impact}`,
+  });
+
   return (
     <>
       <button onClick={() => router.back()}>🔙</button>
@@ -36,6 +43,14 @@ export default function EventDetails({ events }) {
         </StyledListItem>
         <StyledListItem>Time: {event.time}</StyledListItem>
         <StyledListItem>Impact: {event.impact}</StyledListItem>
+        <StyledListItem>
+          <a
+            href={`/api/event.ics?${icsQuery.toString()}`}
+            download={`${event.id}.ics`}
+          >
+            Add to Calendar
+          </a>
+        </StyledListItem>
         <StyledListItem>
           Previous: {event.previous ? event.previous : "unknown"}
         </StyledListItem>
