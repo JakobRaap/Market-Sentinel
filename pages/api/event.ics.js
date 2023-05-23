@@ -18,7 +18,16 @@ function parseDateString(dateString) {
 
   return new Date(year, month, day, hours, minutes);
 }
-
+let alarms = [
+  {
+    action: "audio",
+    description: "Reminder",
+    trigger: { hours: 0, minutes: 5, before: true },
+    repeat: 2,
+    attachType: "VALUE=URI",
+    attach: "Glass",
+  },
+];
 export default function handler(request, response) {
   if (request.method == "GET") {
     const title = request.query.title;
@@ -39,6 +48,7 @@ export default function handler(request, response) {
       ],
       duration: { minutes: Number.parseInt(duration, 10) },
       description,
+      alarms: alarms,
     };
 
     const { error, value } = createEvent(event);
