@@ -24,7 +24,7 @@ export default function CalendarNavigationBar({ page }) {
   return (
     <StyledHeader>
       <StyledLink
-        active={page === "today" ? "true" : "false"}
+        active={page === "today" ? true : "false"}
         withborder="true"
         href={"/"}
       >
