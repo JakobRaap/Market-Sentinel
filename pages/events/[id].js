@@ -25,7 +25,7 @@ export default function EventDetails({ events }) {
     return null;
   }
   const icsQuery = new URLSearchParams({
-    title: `[Economic Calendar] ${event.title}`,
+    title: `${(event.title, event.flag)}`,
     start: `${event.date} ${event.time}`,
     duration: 30,
     description: `Impact: ${event.impact}`,

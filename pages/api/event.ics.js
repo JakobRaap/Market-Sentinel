@@ -25,7 +25,7 @@ export default function handler(request, response) {
       },
     ];
     const event = {
-      title,
+      title: `[Economic Calendar] ${title}`,
       start: [
         startDateTime.getFullYear(),
         startDateTime.getMonth() + 1,

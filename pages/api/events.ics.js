@@ -5,7 +5,7 @@ export default function handler(request, response) {
   if (request.method == "GET") {
     const events = JSON.parse(request.query.events);
     const icsEvents = events.map((event) => {
-      const title = `[Economic Calendar] ${event.title} ${event.flag}`;
+      const title = `${event.title} ${event.flag}`;
       const start = `${event.date} ${event.time}`;
       const duration = 30;
       const description = `Impact: ${event.impact}`;
@@ -29,7 +29,7 @@ export default function handler(request, response) {
       ];
       const startDateTime = parseDateString(start);
       return {
-        title,
+        title: `[Economic Calendar] ${title}`,
         start: [
           startDateTime.getFullYear(),
           startDateTime.getMonth() + 1,
