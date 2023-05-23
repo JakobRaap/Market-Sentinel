@@ -26,7 +26,7 @@ export default function HomePage({ events, onToggleAlarm }) {
   return (
     <div>
       <CalendarNavigationBar page="today" />
-      <button onClick={handleAlarm}> Alarm</button>
+
       <TodaysCards
         events={todaysEvents}
         onToggleAlarm={onToggleAlarm}

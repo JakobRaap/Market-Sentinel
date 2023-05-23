@@ -12,9 +12,9 @@ const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: none;
   padding: 10px;
-  ${(props) => props.withborder && `border-right: 1px solid black;`}
+  ${(props) => props.$withborder && `border-right: 1px solid black;`}
   ${(props) =>
-    props.active &&
+    props.$active &&
     css`
       font-weight: bold;
       background-color: #ccc;
@@ -23,17 +23,10 @@ const StyledLink = styled(Link)`
 export default function CalendarNavigationBar({ page }) {
   return (
     <StyledHeader>
-      <StyledLink
-        active={page === "today" ? true : false}
-        withborder="true"
-        href={"/"}
-      >
+      <StyledLink $active={page === "today"} $withborder href={"/"}>
         Todays Events
       </StyledLink>
-      <StyledLink
-        active={page === "thisWeek" ? true : false}
-        href={"/thisWeek"}
-      >
+      <StyledLink $active={page === "thisWeek"} href={"/thisWeek"}>
         This Weeks Events
       </StyledLink>
     </StyledHeader>

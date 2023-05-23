@@ -10,7 +10,7 @@ const StyledList = styled.ul`
 `;
 const StyledListItem = styled.li`
   text-align: center;
-  margin: 60px;
+  margin: 45px;
 `;
 
 export default function EventDetails({ events }) {
@@ -24,6 +24,12 @@ export default function EventDetails({ events }) {
   if (!event) {
     return null;
   }
+  const icsQuery = new URLSearchParams({
+    title: `${(event.title, event.flag)}`,
+    start: `${event.date} ${event.time}`,
+    duration: 30,
+    description: `Impact: ${event.impact}`,
+  });
 
   return (
     <>
@@ -43,6 +49,14 @@ export default function EventDetails({ events }) {
         </StyledListItem>
         <StyledListItem>
           Forecast: {event.forecast ? event.forecast : "unknown"}
+        </StyledListItem>
+        <StyledListItem>
+          <a
+            href={`/api/event.ics?${icsQuery.toString()}`}
+            download={`${event.id}.ics`}
+          >
+            Add to Calendar
+          </a>
         </StyledListItem>
       </StyledList>
       <NavigationBar />
