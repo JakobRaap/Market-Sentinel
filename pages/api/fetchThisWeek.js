@@ -18,6 +18,36 @@ const countryFlags = {
   CNY: "🇨🇳",
 };
 
+function convertToBerlinTime(time) {
+  // Extract the hours, minutes, and meridiem from the time string
+  const [timeDigits, meridiem] = time.split(/(?<=\d)(am|pm)/i);
+  // Parse the hours and minutes
+  let hours = parseInt(timeDigits.slice(0, -2));
+  const minutes = parseInt(timeDigits.slice(-2));
+  // Adjust hours based on meridiem
+  if (meridiem.toLowerCase() === "pm" && hours !== 12) {
+    hours += 12;
+  } else if (meridiem.toLowerCase() === "am" && hours === 12) {
+    hours = 0;
+  }
+  // Add 2 hours to the time
+  let berlinHours = (hours + 2) % 24;
+  // Format the time in the 12-hour format
+  const berlinMeridiem = berlinHours < 12 ? "am" : "pm";
+  let berlinTime12Hour = `${
+    berlinHours === 0 ? 12 : berlinHours > 12 ? berlinHours - 12 : berlinHours
+  }:${minutes < 10 ? "0" : ""}${minutes}${berlinMeridiem}`;
+  // Format the time in the 24-hour format
+  let berlinTime24Hour = `${berlinHours < 10 ? "0" : ""}${berlinHours}:${
+    minutes < 10 ? "0" : ""
+  }${minutes}`;
+  // Special case: Convert "12:00pm" to "12:00" in the 24-hour format
+  if (berlinTime24Hour.endsWith("pm") && berlinHours === 12) {
+    berlinTime24Hour = berlinTime24Hour.replace("pm", "");
+  }
+  return [berlinTime12Hour, berlinTime24Hour];
+}
+
 function getDayOfWeek(dateString) {
   //this function turns a date string into its weekday
   const [month, day, year] = dateString.split("-");
@@ -44,6 +74,11 @@ export default async function fetchThisWeek(request, response) {
     event.weekday = getDayOfWeek(event.date);
     event.alarm = false;
 
+    const [berlinTime12Hour, berlinTime24Hour] = convertToBerlinTime(
+      event.time
+    );
+    event.time = berlinTime12Hour;
+    event.berlinTime = berlinTime24Hour;
     return event;
   });
 

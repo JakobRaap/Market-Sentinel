@@ -19,7 +19,7 @@ const StyledListItem = styled.li`
 export default function WeeklyCard({ event, onToggleAlarm }) {
   return (
     <StyledListItem>
-      <p>{event.time}</p>
+      <p>{event.berlinTime}</p>
       <StyledLink href={`/events/${event.id}`}>{event.title}</StyledLink>
 
       <p>

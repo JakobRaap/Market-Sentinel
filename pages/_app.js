@@ -6,10 +6,39 @@ import useLocalStorageState from "use-local-storage-state";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
+  const [flagSettings, setFlagSettings] = useLocalStorageState(
+    "selectedFlags",
+    {
+      defaultValue: [],
+    }
+  );
+  const [allEvents, setAllEvents] = useState([]);
   const [newsEvents, setNewsEvents] = useState([]);
   const [alarmEvents, setAlarmEvents] = useLocalStorageState("events", {
     defaultValue: [],
   });
+
+  function handleChechboxesToggle(id) {
+    if (flagSettings.includes(id)) {
+      setFlagSettings(
+        flagSettings.filter((selectedFlag) => selectedFlag !== id)
+      );
+    } else {
+      setFlagSettings([...flagSettings, id]);
+    }
+  }
+
+  useEffect(() => {
+    if (flagSettings.includes("FlagsTurnedOn")) {
+      const PreferredCurrenciesOnly = allEvents.filter((event) =>
+        flagSettings.includes(event.country)
+      );
+      setNewsEvents(PreferredCurrenciesOnly);
+    } else {
+      setNewsEvents(allEvents);
+    }
+  }, [flagSettings]);
+
   const { data: events } = useSWR("/api/fetchThisWeek", fetcher);
 
   useEffect(() => {
@@ -23,6 +52,7 @@ export default function App({ Component, pageProps }) {
         return event;
       });
       setNewsEvents(updatedEventsArray);
+      setAllEvents(updatedEventsArray);
     }
   }, [events, alarmEvents]);
 
@@ -65,6 +95,8 @@ export default function App({ Component, pageProps }) {
         events={newsEvents ?? []}
         onToggleAlarm={handleToggleAlarm}
         getEachDaysEvents={getEachDaysEvents}
+        onChechboxesToggle={handleChechboxesToggle}
+        selectedFlags={flagSettings}
       />
     </>
   );

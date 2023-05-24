@@ -1,10 +1,13 @@
 import NavigationBar from "@/components/NavigationBar";
 import PreferredCurrencies from "@/components/PreferredCurrencies";
 
-export default function settings() {
+export default function settings({ onChechboxesToggle, selectedFlags }) {
   return (
     <>
-      <PreferredCurrencies></PreferredCurrencies>
+      <PreferredCurrencies
+        onChechboxesToggle={onChechboxesToggle}
+        selectedFlags={selectedFlags}
+      ></PreferredCurrencies>
       <NavigationBar />
     </>
   );

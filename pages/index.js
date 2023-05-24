@@ -15,13 +15,15 @@ export default function HomePage({ events, onToggleAlarm }) {
     return event.date === getTodaysDate();
   });
 
-  function handleAlarm() {
-    var now = new Date();
-    var date = new Date(+now + 2000);
-    alarm(date, function () {
-      console.log("Hello, world!");
-    });
-  }
+  // function handleAlarm() {
+  //   var now = new Date();
+  //   var date = new Date(+now + 2000);
+  //   alarm(date, function () {
+  //     console.log("Hello, world!");
+  //   });
+  // }
+
+  console.warn(events);
 
   return (
     <div>

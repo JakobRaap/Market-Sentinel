@@ -34,7 +34,7 @@ export default function TodaysCard({ event, onToggleAlarm }) {
       <StyledListItem>
         <StyledLink href={`/events/${event.id}`}>
           <h2>{event.title}</h2>
-          <p>{event.time}</p>
+          <p>{event.berlinTime}</p>
           <p>
             {event.country} {event.flag}
           </p>
