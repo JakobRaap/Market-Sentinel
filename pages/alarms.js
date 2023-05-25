@@ -1,15 +1,13 @@
 import NavigationBar from "@/components/NavigationBar";
-import TodaysCard from "@/components/TodaysCard";
-import TodaysCards from "@/components/TodaysCards";
-import WeeklyCard from "@/components/WeeklyCard";
 import WeeklyCards from "@/components/WeeklyCards";
+import getEachDaysEvents from "@/components/utils/getEachDaysEvents";
 
-export default function Alarms({ events, onToggleAlarm, getEachDaysEvents }) {
+export default function Alarms({ events, onToggleAlarm, settings }) {
   const alarmEvents = events.filter((event) => event.alarm === true);
   const weekdayEvents = getEachDaysEvents(alarmEvents);
-
   const icsQuery = new URLSearchParams({
     events: JSON.stringify(alarmEvents),
+    settings: JSON.stringify(settings),
   });
 
   return (

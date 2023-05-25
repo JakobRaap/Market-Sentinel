@@ -3,22 +3,28 @@ import { createEvent } from "ics";
 
 export default function handler(request, response) {
   if (request.method == "GET") {
-    const { title, start, duration, description } = request.query;
-
+    const {
+      title,
+      start,
+      duration,
+      description,
+      alarmTriggerA,
+      alarmTriggerB,
+    } = request.query;
     const startDateTime = parseDateString(start);
     const alarms = [
       {
         action: "audio",
-        description: `5 min until ${title}`,
-        trigger: { hours: 0, minutes: 5, before: true },
+        description: `${alarmTriggerA} min until ${title}`,
+        trigger: { hours: 0, minutes: alarmTriggerA, before: true },
         repeat: 2,
         attachType: "VALUE=URI",
         attach: "Glass",
       },
       {
         action: "audio",
-        description: `20 min until ${title}`,
-        trigger: { hours: 0, minutes: 20, before: true },
+        description: `${alarmTriggerB} min until ${title}`,
+        trigger: { hours: 0, minutes: alarmTriggerB, before: true },
         repeat: 2,
         attachType: "VALUE=URI",
         attach: "Glass",

@@ -2,14 +2,14 @@ import IcsSettings from "@/components/IcsSettings";
 import NavigationBar from "@/components/NavigationBar";
 import PreferredCurrencies from "@/components/PreferredCurrencies";
 
-export default function settings({ onChechboxesToggle, settings }) {
+export default function settings({ changeSettings, settings }) {
   return (
     <>
       <PreferredCurrencies
-        onChechboxesToggle={onChechboxesToggle}
+        changeSettings={changeSettings}
         settings={settings}
       ></PreferredCurrencies>
-      <IcsSettings />
+      <IcsSettings settings={settings} changeSettings={changeSettings} />
       <NavigationBar />
     </>
   );

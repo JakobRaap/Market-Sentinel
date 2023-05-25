@@ -4,29 +4,31 @@ import { createEvents } from "ics";
 export default function handler(request, response) {
   if (request.method == "GET") {
     const events = JSON.parse(request.query.events);
+    const settings = JSON.parse(request.query.settings);
     const icsEvents = events.map((event) => {
       const title = `${event.title} ${event.flag}`;
       const start = `${event.date} ${event.time}`;
-      const duration = 30;
+      const duration = settings.eventDuration;
       const description = `Impact: ${event.impact}`;
       const alarms = [
         {
           action: "audio",
-          description: `5 min until ${event.title}`,
-          trigger: { hours: 0, minutes: 5, before: true },
+          description: `${settings.alarmTriggerA} min until ${event.title}`,
+          trigger: { hours: 0, minutes: settings.alarmTriggerA, before: true },
           repeat: 2,
           attachType: "VALUE=URI",
           attach: "Glass",
         },
         {
           action: "audio",
-          description: `20 min until ${event.title}`,
-          trigger: { hours: 0, minutes: 20, before: true },
+          description: `${settings.alarmTriggerB} min until ${event.title}`,
+          trigger: { hours: 0, minutes: settings.alarmTriggerB, before: true },
           repeat: 2,
           attachType: "VALUE=URI",
           attach: "Glass",
         },
       ];
+
       const startDateTime = parseDateString(start);
       return {
         title: `[Economic Calendar] ${title}`,

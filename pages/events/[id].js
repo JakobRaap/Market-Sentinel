@@ -13,10 +13,10 @@ const StyledListItem = styled.li`
   margin: 45px;
 `;
 
-export default function EventDetails({ events }) {
+export default function EventDetails({ events, settings }) {
   const router = useRouter();
   const { id } = router.query;
-
+  console.error(settings);
   const event = events.find((event) => {
     return event.id === id;
   });
@@ -27,8 +27,10 @@ export default function EventDetails({ events }) {
   const icsQuery = new URLSearchParams({
     title: `${(event.title, event.flag)}`,
     start: `${event.date} ${event.time}`,
-    duration: 30,
+    duration: settings.eventDuration,
     description: `Impact: ${event.impact}`,
+    alarmTriggerA: settings.alarmTriggerA,
+    alarmTriggerB: settings.alarmTriggerB,
   });
 
   return (
