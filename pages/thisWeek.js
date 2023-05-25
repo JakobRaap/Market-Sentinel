@@ -16,9 +16,6 @@ export default function ThisWeek({ events, onToggleAlarm }) {
         <h1>No events this week</h1>
       ) : (
         <>
-          <h2>Events this week</h2>
-          <h1>This Week&#96;s Events</h1>
-
           {weekdayEvents.monday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.monday}
