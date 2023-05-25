@@ -10,11 +10,14 @@ const StyledListItem = styled.li`
   border: 1px solid black;
   margin: 2px;
   transition: background-color 0.2s;
+  h1 {
+    margin: 0;
+  }
   h2 {
     font-size: 1rem;
     margin-left: 5px;
     font-weight: bold;
-
+    margin: 0;
     text-transform: uppercase;
   }
   p {
@@ -33,11 +36,12 @@ export default function TodaysCard({ event, onToggleAlarm }) {
     <>
       <StyledListItem>
         <StyledLink href={`/events/${event.id}`}>
-          <h2>{event.title}</h2>
-          <p>{event.berlinTime}</p>
-          <p>
+          <h1>
             {event.country} {event.flag}
-          </p>
+          </h1>
+          <h2>{event.berlinTime}</h2>
+          <p>{event.title}</p>
+
           <p>{event.impact}</p>
         </StyledLink>
         <Image
