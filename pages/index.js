@@ -23,8 +23,6 @@ export default function HomePage({ events, onToggleAlarm }) {
   //   });
   // }
 
-  console.warn(events);
-
   return (
     <div>
       <CalendarNavigationBar page="today" />

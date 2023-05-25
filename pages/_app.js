@@ -6,40 +6,46 @@ import useLocalStorageState from "use-local-storage-state";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
-  const [flagSettings, setFlagSettings] = useLocalStorageState(
-    "selectedFlags",
-    {
-      defaultValue: [],
-    }
-  );
+  const [settings, setSettings] = useLocalStorageState("settings", {
+    defaultValue: {
+      countryFlags: {
+        USD: true,
+        EUR: true,
+        GBP: true,
+        AUD: true,
+        CAD: true,
+        NZD: true,
+        CHF: true,
+        JPY: true,
+        CNY: true,
+      },
+      flagsTurnedOn: false,
+      alarmTriggerA: 5,
+      alarmTriggerB: 20,
+    },
+  });
+
   const [allEvents, setAllEvents] = useState([]);
   const [newsEvents, setNewsEvents] = useState([]);
   const [alarmEvents, setAlarmEvents] = useLocalStorageState("events", {
     defaultValue: [],
   });
-
-  function handleChechboxesToggle(id) {
-    if (flagSettings.includes(id)) {
-      setFlagSettings(
-        flagSettings.filter((selectedFlag) => selectedFlag !== id)
-      );
-    } else {
-      setFlagSettings([...flagSettings, id]);
-    }
-  }
-
-  useEffect(() => {
-    if (flagSettings.includes("FlagsTurnedOn")) {
-      const PreferredCurrenciesOnly = allEvents.filter((event) =>
-        flagSettings.includes(event.country)
-      );
-      setNewsEvents(PreferredCurrenciesOnly);
-    } else {
-      setNewsEvents(allEvents);
-    }
-  }, [flagSettings]);
-
   const { data: events } = useSWR("/api/fetchThisWeek", fetcher);
+
+  function handleFlagChechboxesToggle(setting, id) {
+    if (setting === "flag") {
+      const updatedSettings = settings;
+      updatedSettings.countryFlags[id] = !updatedSettings.countryFlags[id];
+
+      setSettings(updatedSettings);
+    } else if (setting === "preferredCurrenciesToggle") {
+      const updatedSettings = settings;
+      updatedSettings.flagsTurnedOn = !updatedSettings.flagsTurnedOn;
+
+      setSettings(updatedSettings);
+    }
+    console.warn(settings);
+  }
 
   useEffect(() => {
     // update events array with alarm info
@@ -54,7 +60,27 @@ export default function App({ Component, pageProps }) {
       setNewsEvents(updatedEventsArray);
       setAllEvents(updatedEventsArray);
     }
-  }, [events, alarmEvents]);
+
+    if (settings.flagsTurnedOn) {
+      console.log(allEvents);
+      const preferredCurrenciesOnly = allEvents.filter(
+        (event) => settings.countryFlags[event.country]
+      );
+      setNewsEvents(preferredCurrenciesOnly);
+    }
+  }, [events, alarmEvents, settings]);
+
+  // useEffect(() => {
+  //   if (flagSettings.includes("FlagsTurnedOn")) {
+  //     const PreferredCurrenciesOnly = allEvents.filter((event) =>
+  //       flagSettings.includes(event.country)
+  //     );
+  //     setNewsEvents(PreferredCurrenciesOnly);
+  //   } else if (!flagSettings.includes("FlagsTurnedOn")) {
+  //     setNewsEvents(allEvents);
+  //     console.log("triggered");
+  //   }
+  // }, [flagSettings]);
 
   function getEachDaysEvents(events) {
     const weekdayEvents = {};
@@ -95,8 +121,8 @@ export default function App({ Component, pageProps }) {
         events={newsEvents ?? []}
         onToggleAlarm={handleToggleAlarm}
         getEachDaysEvents={getEachDaysEvents}
-        onChechboxesToggle={handleChechboxesToggle}
-        selectedFlags={flagSettings}
+        onChechboxesToggle={handleFlagChechboxesToggle}
+        settings={settings}
       />
     </>
   );

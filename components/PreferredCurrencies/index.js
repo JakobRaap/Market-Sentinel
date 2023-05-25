@@ -16,10 +16,8 @@ const countryFlags = {
   JPY: "🇯🇵",
   CNY: "🇨🇳",
 };
-export default function PreferredCurrencies({
-  onChechboxesToggle,
-  selectedFlags,
-}) {
+export default function PreferredCurrencies({ onChechboxesToggle, settings }) {
+  console.warn(settings);
   return (
     <>
       <h1>Settings</h1>
@@ -27,8 +25,8 @@ export default function PreferredCurrencies({
         Show preferred currencies only:
         <input
           type="checkbox"
-          onChange={() => onChechboxesToggle("FlagsTurnedOn")}
-          checked={selectedFlags.includes("FlagsTurnedOn")}
+          onChange={() => onChechboxesToggle("preferredCurrenciesToggle", "")}
+          checked={settings.flagsTurnedOn}
         ></input>
       </h4>
 
@@ -37,9 +35,9 @@ export default function PreferredCurrencies({
           <label key={flag}>
             <input
               type="checkbox"
-              checked={selectedFlags.includes(flag)}
-              onChange={() => onChechboxesToggle(flag)}
-              disabled={!selectedFlags.includes("FlagsTurnedOn")}
+              onChange={() => onChechboxesToggle("flag", flag)}
+              checked={settings.countryFlags[flag]}
+              disabled={!settings.flagsTurnedOn}
             />
             {emoji} {flag}
           </label>

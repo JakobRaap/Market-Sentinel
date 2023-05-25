@@ -14,27 +14,39 @@ export default function ThisWeek({ events, onToggleAlarm, getEachDaysEvents }) {
   return (
     <>
       <CalendarNavigationBar page="thisWeek" />
+
       <h1>This Week&#96;s Events</h1>
-      <WeeklyCards
-        events={weekdayEvents.monday}
-        onToggleAlarm={onToggleAlarm}
-      />
-      <WeeklyCards
-        events={weekdayEvents.tuesday}
-        onToggleAlarm={onToggleAlarm}
-      />
-      <WeeklyCards
-        events={weekdayEvents.wednesday}
-        onToggleAlarm={onToggleAlarm}
-      />
-      <WeeklyCards
-        events={weekdayEvents.thursday}
-        onToggleAlarm={onToggleAlarm}
-      />
-      <WeeklyCards
-        events={weekdayEvents.friday}
-        onToggleAlarm={onToggleAlarm}
-      />
+
+      {weekdayEvents.monday.length > 0 && (
+        <WeeklyCards
+          events={weekdayEvents.monday}
+          onToggleAlarm={onToggleAlarm}
+        />
+      )}
+      {weekdayEvents.tuesday.length > 0 && (
+        <WeeklyCards
+          events={weekdayEvents.tuesday}
+          onToggleAlarm={onToggleAlarm}
+        />
+      )}
+      {weekdayEvents.wednesday.length > 0 && (
+        <WeeklyCards
+          events={weekdayEvents.wednesday}
+          onToggleAlarm={onToggleAlarm}
+        />
+      )}
+      {weekdayEvents.thursday.length > 0 && (
+        <WeeklyCards
+          events={weekdayEvents.thursday}
+          onToggleAlarm={onToggleAlarm}
+        />
+      )}
+      {weekdayEvents.friday.length > 0 && (
+        <WeeklyCards
+          events={weekdayEvents.friday}
+          onToggleAlarm={onToggleAlarm}
+        />
+      )}
       <NavigationBar />
     </>
   );
