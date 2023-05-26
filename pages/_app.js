@@ -23,9 +23,12 @@ export default function App({ Component, pageProps }) {
       alarmTriggerA: 5,
       alarmTriggerB: 20,
       eventDuration: 30,
+      impactLow: true,
+      impactMedium: true,
+      impactHigh: true,
     },
   });
-  const [allEvents, setAllEvents] = useState([]);
+
   const [newsEvents, setNewsEvents] = useState([]);
   const [alarmEvents, setAlarmEvents] = useLocalStorageState("events", {
     defaultValue: [],
@@ -54,6 +57,18 @@ export default function App({ Component, pageProps }) {
       const updatedSettings = settings;
       updatedSettings.eventDuration = value;
       setSettings(updatedSettings);
+    } else if (setting === "impactLow") {
+      const updatedSettings = settings;
+      updatedSettings.impactLow = !updatedSettings.impactLow;
+      setSettings(updatedSettings);
+    } else if (setting === "impactMedium") {
+      const updatedSettings = settings;
+      updatedSettings.impactMedium = !updatedSettings.impactMedium;
+      setSettings(updatedSettings);
+    } else if (setting === "impactHigh") {
+      const updatedSettings = settings;
+      updatedSettings.impactHigh = !updatedSettings.impactHigh;
+      setSettings(updatedSettings);
     }
   }
 
@@ -68,17 +83,23 @@ export default function App({ Component, pageProps }) {
         return event;
       });
       setNewsEvents(updatedEventsArray);
-      setAllEvents(updatedEventsArray);
     }
   }, [events, alarmEvents, settings]);
-  useEffect(() => {
-    if (settings.flagsTurnedOn) {
-      const preferredCurrenciesOnly = allEvents.filter(
-        (event) => settings.countryFlags[event.country]
-      );
-      setNewsEvents(preferredCurrenciesOnly);
+
+  const eventsToShow = newsEvents.filter((event) => {
+    const { impact, country } = event;
+    if (impact === "holiday") {
+      return true;
+    } else if (
+      (impact === "Low" && settings.impactLow) ||
+      (impact === "Medium" && settings.impactMedium) ||
+      (impact === "High" && settings.impactHigh)
+    ) {
+      return settings.flagsTurnedOn ? settings.countryFlags[country] : true;
     }
-  }, [allEvents, settings]);
+    return false;
+  });
+
   function handleToggleAlarm(id) {
     const updatedEvents = newsEvents.map((event) => {
       if (event.id === id) {
@@ -88,7 +109,6 @@ export default function App({ Component, pageProps }) {
     });
     setAlarmEvents(updatedEvents);
     setNewsEvents(updatedEvents);
-    setAllEvents(updatedEvents);
   }
 
   return (
@@ -96,7 +116,7 @@ export default function App({ Component, pageProps }) {
       <GlobalStyle />
       <Component
         {...pageProps}
-        events={newsEvents ?? []}
+        events={eventsToShow ?? []}
         onToggleAlarm={handleToggleAlarm}
         changeSettings={changeSettings}
         settings={settings}

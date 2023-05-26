@@ -24,7 +24,7 @@ export default function PreferredCurrencies({ changeSettings, settings }) {
         Show preferred currencies only:
         <input
           type="checkbox"
-          onChange={() => changeSettings("preferredCurrenciesToggle", "")}
+          onChange={() => changeSettings("preferredCurrenciesToggle")}
           checked={settings.flagsTurnedOn}
         ></input>
       </h4>

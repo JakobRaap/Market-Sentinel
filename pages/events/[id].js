@@ -16,7 +16,7 @@ const StyledListItem = styled.li`
 export default function EventDetails({ events, settings }) {
   const router = useRouter();
   const { id } = router.query;
-  console.error(settings);
+
   const event = events.find((event) => {
     return event.id === id;
   });
