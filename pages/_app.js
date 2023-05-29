@@ -26,6 +26,7 @@ export default function App({ Component, pageProps }) {
       impactLow: true,
       impactMedium: true,
       impactHigh: true,
+      bankHolidays: true,
     },
   });
 
@@ -69,13 +70,31 @@ export default function App({ Component, pageProps }) {
       const updatedSettings = settings;
       updatedSettings.impactHigh = !updatedSettings.impactHigh;
       setSettings(updatedSettings);
+    } else if (setting === "bankHolidays") {
+      const updatedSettings = settings;
+      updatedSettings.bankHolidays = !updatedSettings.bankHolidays;
+      setSettings(updatedSettings);
+    }
+  }
+
+  function filterTodaysEvents(events) {
+    if (events) {
+      const today = new Date();
+      return events.filter((event) => {
+        const eventDate = new Date(event.dateObjectString);
+        return (
+          eventDate.getDate() === today.getDate() &&
+          eventDate.getMonth() === today.getMonth() &&
+          eventDate.getFullYear() === today.getFullYear()
+        );
+      });
     }
   }
 
   useEffect(() => {
-    // update events array with alarm info
     if (events) {
       const updatedEventsArray = events.map((event) => {
+        event.dateObject = new Date(event.dateObjectString);
         const updatedEvent = alarmEvents.find((alarm) => alarm.id === event.id);
         if (updatedEvent) {
           return { ...event, alarm: updatedEvent.alarm };
@@ -83,6 +102,7 @@ export default function App({ Component, pageProps }) {
         return event;
       });
       setNewsEvents(updatedEventsArray);
+      console.log(updatedEventsArray);
     }
   }, [events, alarmEvents, settings]);
 
@@ -93,7 +113,8 @@ export default function App({ Component, pageProps }) {
     } else if (
       (impact === "Low" && settings.impactLow) ||
       (impact === "Medium" && settings.impactMedium) ||
-      (impact === "High" && settings.impactHigh)
+      (impact === "High" && settings.impactHigh) ||
+      (impact === "Holiday" && settings.bankHolidays)
     ) {
       return settings.flagsTurnedOn ? settings.countryFlags[country] : true;
     }
@@ -120,6 +141,7 @@ export default function App({ Component, pageProps }) {
         onToggleAlarm={handleToggleAlarm}
         changeSettings={changeSettings}
         settings={settings}
+        todaysEvents={filterTodaysEvents(eventsToShow)}
       />
     </>
   );

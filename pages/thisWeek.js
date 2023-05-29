@@ -2,13 +2,9 @@ import CalendarNavigationBar from "@/components/CalendarNavigationBar";
 import NavigationBar from "@/components/NavigationBar";
 import WeeklyCards from "@/components/WeeklyCards";
 import getEachDaysEvents from "@/components/utils/getEachDaysEvents";
-import Link from "next/link";
 
 export default function ThisWeek({ events, onToggleAlarm }) {
-  //prevent the hydration error on refresh
-
   const weekdayEvents = getEachDaysEvents(events);
-
   return (
     <>
       <CalendarNavigationBar page="thisWeek" />

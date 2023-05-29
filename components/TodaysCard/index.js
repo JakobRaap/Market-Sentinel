@@ -7,8 +7,9 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 const StyledListItem = styled.li`
-  border: 1px solid black;
+  border: 2px solid black;
   margin: 2px;
+  margin-bottom: 10px;
   transition: background-color 0.2s;
   h1 {
     margin: 0;

@@ -1,4 +1,5 @@
 export default function DisplaySettings({ settings, changeSettings }) {
+  console.log(settings);
   return (
     <>
       <h3>Display Settings</h3>
@@ -22,6 +23,15 @@ export default function DisplaySettings({ settings, changeSettings }) {
         id="checkboxHigh"
         checked={settings.impactHigh}
         onChange={() => changeSettings("impactHigh")}
+      />
+      <br></br>
+      <label htmlFor="checkboxBankHoliday">Show bank holidays</label>
+      <input
+        type="checkbox"
+        id="checkboxBankHoliday"
+        checked={settings.bankHolidays}
+        onChange={() => changeSettings("bankHolidays")}
+        className="checkbox"
       />
     </>
   );
