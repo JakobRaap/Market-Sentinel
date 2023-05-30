@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import WeeklyCard from "../WeeklyCard";
-import { uid } from "uid";
 const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -20,7 +19,7 @@ export default function WeeklyCards({ events, onToggleAlarm, showWeekDay }) {
         {events.map((event) => {
           return (
             <WeeklyCard
-              key={uid()}
+              key={event.id}
               event={event}
               onToggleAlarm={onToggleAlarm}
               showWeekDay={showWeekDay}

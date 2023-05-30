@@ -1,7 +1,7 @@
 import CalendarNavigationBar from "@/components/CalendarNavigationBar";
 import NavigationBar from "@/components/NavigationBar";
 import TodaysCards from "@/components/TodaysCards";
-var alarm = require("alarm");
+
 export default function HomePage({ onToggleAlarm, todaysEvents }) {
   return (
     <div>

@@ -1,4 +1,3 @@
-import { uid } from "uid";
 import TodaysCard from "../TodaysCard";
 import styled from "styled-components";
 
@@ -16,7 +15,7 @@ export default function TodaysCards({ events, onToggleAlarm }) {
         events.map((event) => {
           return (
             <TodaysCard
-              key={uid()}
+              key={event.id}
               event={event}
               onToggleAlarm={onToggleAlarm}
             ></TodaysCard>

@@ -2,7 +2,7 @@ import useSWR from "swr";
 import GlobalStyle from "../styles";
 import { useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
-
+import AlarmTimer from "@/components/AlarmTimer";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function App({ Component, pageProps }) {
@@ -102,9 +102,8 @@ export default function App({ Component, pageProps }) {
         return event;
       });
       setNewsEvents(updatedEventsArray);
-      console.log(updatedEventsArray);
     }
-  }, [events, alarmEvents, settings]);
+  }, [events]);
 
   const eventsToShow = newsEvents.filter((event) => {
     const { impact, country } = event;
@@ -121,9 +120,9 @@ export default function App({ Component, pageProps }) {
     return false;
   });
 
-  function handleToggleAlarm(id) {
+  function handleToggleAlarm(ids) {
     const updatedEvents = newsEvents.map((event) => {
-      if (event.id === id) {
+      if (ids.includes(event.id)) {
         return { ...event, alarm: !event.alarm };
       }
       return event;
@@ -141,6 +140,10 @@ export default function App({ Component, pageProps }) {
         onToggleAlarm={handleToggleAlarm}
         changeSettings={changeSettings}
         settings={settings}
+        todaysEvents={filterTodaysEvents(eventsToShow)}
+      />
+      <AlarmTimer
+        onToggleAlarm={handleToggleAlarm}
         todaysEvents={filterTodaysEvents(eventsToShow)}
       />
     </>

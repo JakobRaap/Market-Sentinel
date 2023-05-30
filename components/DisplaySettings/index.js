@@ -1,5 +1,4 @@
 export default function DisplaySettings({ settings, changeSettings }) {
-  console.log(settings);
   return (
     <>
       <h3>Display Settings</h3>
