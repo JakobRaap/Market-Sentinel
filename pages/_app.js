@@ -12,12 +12,12 @@ export default function App({ Component, pageProps }) {
         USD: true,
         EUR: true,
         GBP: true,
-        AUD: true,
-        CAD: true,
-        NZD: true,
-        CHF: true,
-        JPY: true,
-        CNY: true,
+        AUD: false,
+        CAD: false,
+        NZD: false,
+        CHF: false,
+        JPY: false,
+        CNY: false,
       },
       flagsTurnedOn: false,
       alarmTriggerA: 5,
@@ -102,6 +102,7 @@ export default function App({ Component, pageProps }) {
         return event;
       });
       setNewsEvents(updatedEventsArray);
+      console.log(updatedEventsArray);
     }
   }, [events]);
 

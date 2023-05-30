@@ -64,7 +64,15 @@ export default async function fetchThisWeek(request, response) {
     event.alarm = false;
 
     const dateObject = parseToDateObject(event.date, event.time);
-
+    const dateObjectMinusTwoMinutes = new Date(
+      dateObject.getTime() - 2 * 60 * 1000
+    );
+    event.alarmTime = dateObjectMinusTwoMinutes.toLocaleString("en", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "Etc/GMT-4",
+    });
     event.berlinTime = dateObject.toLocaleString("en", {
       hour: "2-digit",
       minute: "2-digit",

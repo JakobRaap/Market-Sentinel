@@ -15,7 +15,7 @@ export default function TimerComponent({ todaysEvents, onToggleAlarm }) {
       });
 
       const matchingEvents = alarmEvents.filter(
-        (event) => event.berlinTime === currentTime
+        (event) => event.alarmTime === currentTime
       );
 
       if (matchingEvents.length > 0) {
