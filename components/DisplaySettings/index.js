@@ -2,21 +2,23 @@ export default function DisplaySettings({ settings, changeSettings }) {
   return (
     <>
       <h3>Display Settings</h3>
-      <label htmlFor="checkboxLow">Low</label>
+      <label htmlFor="checkboxLow">Low impact events</label>
       <input
         id="checkboxLow"
         checked={settings.impactLow}
         onChange={() => changeSettings("impactLow")}
         type="checkbox"
       />
-      <label htmlFor="checkboxMedium">Medium</label>
+      <br />
+      <label htmlFor="checkboxMedium">Medium impact events</label>
       <input
         type="checkbox"
         id="checkboxMedium"
         checked={settings.impactMedium}
         onChange={() => changeSettings("impactMedium")}
       />
-      <label htmlFor="checkboxHigh">High</label>
+      <br />
+      <label htmlFor="checkboxHigh">High impact events</label>
       <input
         type="checkbox"
         id="checkboxHigh"

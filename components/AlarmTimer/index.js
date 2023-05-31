@@ -1,20 +1,20 @@
 import { useEffect } from "react";
-
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 export default function TimerComponent({ todaysEvents, onToggleAlarm }) {
   const alarmEvents = todaysEvents.filter((event) => event.alarm === true);
 
-  function alarmVoiceMessage(eventNames) {
+  function playAlarmVoicemessage(eventNames) {
     var msg = new SpeechSynthesisUtterance();
     var voices = window.speechSynthesis.getVoices();
     msg.voice = voices[14];
     msg.volume = 1;
-    msg.rate = 0.76;
+    msg.rate = 0.78;
     msg.text = `Attention - ${eventNames}  upcoming. Two minutes remaining. Prepare to exit any open positions.`;
     speechSynthesis.speak(msg);
   }
+
   useEffect(() => {
     const timer = setInterval(() => {
       const currentTime = new Date().toLocaleTimeString("en", {
@@ -32,7 +32,7 @@ export default function TimerComponent({ todaysEvents, onToggleAlarm }) {
           return event.title + " for " + event.country;
         });
 
-        alarmVoiceMessage(eventNames);
+        playAlarmVoicemessage(eventNames);
         toast.warn(eventNames.join(", ") + " in 2 minutes", {
           position: "top-right",
           autoClose: 10000,
