@@ -30,15 +30,15 @@ export default function PreferredCurrencies({ changeSettings, settings }) {
       </h4>
 
       <StyledSection>
-        {Object.entries(countryFlags).map(([flag, emoji]) => (
-          <label key={flag}>
+        {Object.entries(countryFlags).map(([currencyCode, emoji]) => (
+          <label key={currencyCode}>
             <input
               type="checkbox"
-              onChange={() => changeSettings("flag", flag)}
-              checked={settings.countryFlags[flag]}
+              onChange={() => changeSettings("flag", currencyCode)}
+              checked={settings.countryFlags[currencyCode]}
               disabled={!settings.flagsTurnedOn}
             />
-            {emoji} {flag}
+            {emoji} {currencyCode}
           </label>
         ))}
       </StyledSection>

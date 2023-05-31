@@ -6,7 +6,7 @@ const StyledList = styled.ul`
   list-style: none;
 `;
 
-export default function TodaysCards({ events, onToggleAlarm }) {
+export default function TodaysCards({ events, onToggleAlarm, settings }) {
   return (
     <StyledList>
       {events.length === 0 ? (
@@ -18,7 +18,8 @@ export default function TodaysCards({ events, onToggleAlarm }) {
               key={event.id}
               event={event}
               onToggleAlarm={onToggleAlarm}
-            ></TodaysCard>
+              settings={settings}
+            />
           );
         })
       )}

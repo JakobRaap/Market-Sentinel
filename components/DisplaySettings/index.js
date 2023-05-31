@@ -23,14 +23,21 @@ export default function DisplaySettings({ settings, changeSettings }) {
         checked={settings.impactHigh}
         onChange={() => changeSettings("impactHigh")}
       />
-      <br></br>
+      <br />
       <label htmlFor="checkboxBankHoliday">Show bank holidays</label>
       <input
         type="checkbox"
         id="checkboxBankHoliday"
         checked={settings.bankHolidays}
         onChange={() => changeSettings("bankHolidays")}
-        className="checkbox"
+      />
+      <br />
+      <label htmlFor="checkboxShowRiskIcons">Show risk icons</label>
+      <input
+        type="checkbox"
+        id="checkboxShowRiskIcons"
+        checked={settings.showRiskIcons}
+        onChange={() => changeSettings("showRiskIcons")}
       />
     </>
   );

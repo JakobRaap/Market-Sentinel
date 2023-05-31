@@ -2,7 +2,7 @@ export default function IcsSettings({ settings, changeSettings }) {
   return (
     <>
       <h3>Calendar Event Settings</h3>
-
+      <label htmlFor="firstWarning">First warning</label>
       <input
         id="firstWarning"
         type="number"
@@ -13,8 +13,8 @@ export default function IcsSettings({ settings, changeSettings }) {
           changeSettings("alarmTriggerA", e.target.value);
         }}
       ></input>
-      <label htmlFor="firstWarning">First warning</label>
-
+      <br />
+      <label htmlFor="secondWarning">Second warning</label>
       <input
         id="secondWarning"
         type="number"
@@ -25,7 +25,8 @@ export default function IcsSettings({ settings, changeSettings }) {
           changeSettings("alarmTriggerB", e.target.value);
         }}
       ></input>
-      <label htmlFor="secondWarning">Second warning</label>
+      <br />
+      <label htmlFor="eventDuration">Event duration</label>
       <input
         id="eventDuration"
         type="number"
@@ -36,7 +37,6 @@ export default function IcsSettings({ settings, changeSettings }) {
           changeSettings("eventDuration", e.target.value);
         }}
       ></input>
-      <label htmlFor="eventDuration">Event duration</label>
     </>
   );
 }

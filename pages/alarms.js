@@ -27,30 +27,35 @@ export default function Alarms({ events, onToggleAlarm, settings }) {
             <WeeklyCards
               events={weekdayEvents.monday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
           {weekdayEvents.tuesday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.tuesday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
           {weekdayEvents.wednesday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.wednesday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
           {weekdayEvents.thursday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.thursday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
           {weekdayEvents.friday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.friday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
         </>

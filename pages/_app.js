@@ -3,8 +3,10 @@ import GlobalStyle from "../styles";
 import { useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import AlarmTimer from "@/components/AlarmTimer";
+import useSound from "use-sound";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
+const soundUrl = "./alarmtogglesound.mp3";
 export default function App({ Component, pageProps }) {
   const [settings, setSettings] = useLocalStorageState("settings", {
     defaultValue: {
@@ -27,6 +29,7 @@ export default function App({ Component, pageProps }) {
       impactMedium: true,
       impactHigh: true,
       bankHolidays: true,
+      showRiskIcons: true,
     },
   });
 
@@ -35,46 +38,34 @@ export default function App({ Component, pageProps }) {
     defaultValue: [],
   });
   const { data: events } = useSWR("/api/fetchThisWeek", fetcher);
-
+  const [playToggleSound] = useSound(soundUrl);
   function changeSettings(setting, value) {
+    const updatedSettings = { ...settings };
+
     if (setting === "flag") {
-      const updatedSettings = settings;
       updatedSettings.countryFlags[value] =
         !updatedSettings.countryFlags[value];
-      setSettings(updatedSettings);
     } else if (setting === "preferredCurrenciesToggle") {
-      const updatedSettings = settings;
       updatedSettings.flagsTurnedOn = !updatedSettings.flagsTurnedOn;
-      setSettings(updatedSettings);
     } else if (setting === "alarmTriggerA") {
-      const updatedSettings = settings;
       updatedSettings.alarmTriggerA = value;
-      setSettings(updatedSettings);
     } else if (setting === "alarmTriggerB") {
-      const updatedSettings = settings;
       updatedSettings.alarmTriggerB = value;
-      setSettings(updatedSettings);
     } else if (setting === "eventDuration") {
-      const updatedSettings = settings;
       updatedSettings.eventDuration = value;
-      setSettings(updatedSettings);
     } else if (setting === "impactLow") {
-      const updatedSettings = settings;
       updatedSettings.impactLow = !updatedSettings.impactLow;
-      setSettings(updatedSettings);
     } else if (setting === "impactMedium") {
-      const updatedSettings = settings;
       updatedSettings.impactMedium = !updatedSettings.impactMedium;
-      setSettings(updatedSettings);
     } else if (setting === "impactHigh") {
-      const updatedSettings = settings;
       updatedSettings.impactHigh = !updatedSettings.impactHigh;
-      setSettings(updatedSettings);
     } else if (setting === "bankHolidays") {
-      const updatedSettings = settings;
       updatedSettings.bankHolidays = !updatedSettings.bankHolidays;
-      setSettings(updatedSettings);
+    } else if (setting === "showRiskIcons") {
+      updatedSettings.showRiskIcons = !updatedSettings.showRiskIcons;
     }
+
+    setSettings(updatedSettings);
   }
 
   function filterTodaysEvents(events) {
@@ -102,7 +93,6 @@ export default function App({ Component, pageProps }) {
         return event;
       });
       setNewsEvents(updatedEventsArray);
-      console.log(updatedEventsArray);
     }
   }, [events]);
 
@@ -121,13 +111,14 @@ export default function App({ Component, pageProps }) {
     return false;
   });
 
-  function handleToggleAlarm(ids) {
+  function handleToggleAlarm(ids, togglesound = false) {
     const updatedEvents = newsEvents.map((event) => {
       if (ids.includes(event.id)) {
         return { ...event, alarm: !event.alarm };
       }
       return event;
     });
+    togglesound && playToggleSound();
     setAlarmEvents(updatedEvents);
     setNewsEvents(updatedEvents);
   }
