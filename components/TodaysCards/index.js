@@ -1,4 +1,3 @@
-import { uid } from "uid";
 import TodaysCard from "../TodaysCard";
 import styled from "styled-components";
 
@@ -7,21 +6,23 @@ const StyledList = styled.ul`
   list-style: none;
 `;
 
-export default function TodaysCards({ events, onToggleAlarm }) {
+export default function TodaysCards({ events, onToggleAlarm, settings }) {
   return (
-    <>
-      <h1>Today&#96;s Events</h1>
-      <StyledList>
-        {events.map((event) => {
+    <StyledList>
+      {events.length === 0 ? (
+        <h1>No events for today</h1>
+      ) : (
+        events.map((event) => {
           return (
             <TodaysCard
-              key={uid()}
+              key={event.id}
               event={event}
               onToggleAlarm={onToggleAlarm}
-            ></TodaysCard>
+              settings={settings}
+            />
           );
-        })}
-      </StyledList>
-    </>
+        })
+      )}
+    </StyledList>
   );
 }

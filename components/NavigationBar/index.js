@@ -41,6 +41,14 @@ export default function NavigationBar() {
           alt="Toggled alarms navigationbar icon"
         />
       </Link>
+      <Link href="/settings">
+        <StyledImage
+          src="/settings.png"
+          width={50}
+          height={50}
+          alt="Settings navigationbar icon"
+        />
+      </Link>
     </StyledFooter>
   );
 }

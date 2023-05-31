@@ -1,47 +1,53 @@
 import Image from "next/image";
 import Link from "next/link";
 import styled from "styled-components";
+import { StyledLink, StyledListItem } from "./TodaysCard.styled";
 
-const StyledLink = styled(Link)`
-  color: inherit;
-  text-decoration: none;
-`;
-const StyledListItem = styled.li`
-  border: 1px solid black;
-  margin: 2px;
-  transition: background-color 0.2s;
-  h2 {
-    font-size: 1rem;
-    margin-left: 5px;
-    font-weight: bold;
-
-    text-transform: uppercase;
-  }
-  p {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    margin: 2px;
-    margin-left: 8px;
-  }
-  &:hover {
-    background-color: lightslategray;
-  }
-`;
-
-export default function TodaysCard({ event, onToggleAlarm }) {
+export default function TodaysCard({ event, onToggleAlarm, settings }) {
   return (
     <>
       <StyledListItem>
         <StyledLink href={`/events/${event.id}`}>
-          <h2>{event.title}</h2>
-          <p>{event.time}</p>
-          <p>
+          <h1>
             {event.country} {event.flag}
-          </p>
-          <p>{event.impact}</p>
+          </h1>
+          <h2>{event.berlinTime}</h2>
+          <p>{event.title}</p>
+
+          {!settings.showRiskIcons ? (
+            <p>{event.impact}</p>
+          ) : (
+            <>
+              {event.impact === "Low" && (
+                <Image
+                  alt="Low Risk Icon"
+                  src="/lowrisk.png"
+                  width={27}
+                  height={27}
+                />
+              )}
+              {event.impact === "Medium" && (
+                <Image
+                  alt="Medium Risk Icon"
+                  src="/mediumrisk.png"
+                  width={27}
+                  height={27}
+                />
+              )}
+              {event.impact === "High" && (
+                <Image
+                  alt="High Risk Icon"
+                  src="/highrisk.png"
+                  width={27}
+                  height={27}
+                />
+              )}
+              {event.impact === "Holiday" && <p>🏝️</p>}
+            </>
+          )}
         </StyledLink>
         <Image
-          onClick={() => onToggleAlarm(event.id)}
+          onClick={() => onToggleAlarm(event.id, true)}
           alt="Alarmclock icon for toggling alarm on or off"
           className="alarm-icon"
           src={event.alarm ? "/alarm_toggled.png" : "/alarm_untoggled.png"}

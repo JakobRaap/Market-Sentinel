@@ -18,6 +18,25 @@ const countryFlags = {
   CNY: "🇨🇳",
 };
 
+function parseToDateObject(date, time) {
+  const dateParts = date.split("-");
+  const month = Number.parseInt(dateParts[0], 10) - 1;
+  const day = Number.parseInt(dateParts[1], 10);
+  const year = Number.parseInt(dateParts[2], 10);
+
+  const timeParts = time.split(":");
+  let hours = Number.parseInt(timeParts[0], 10);
+  const minutes = Number.parseInt(timeParts[1], 10);
+
+  if (hours === 12) {
+    hours = 0;
+  }
+  if (time.endsWith("pm")) {
+    hours += 12;
+  }
+
+  return new Date(year, month, day, hours, minutes);
+}
 function getDayOfWeek(dateString) {
   //this function turns a date string into its weekday
   const [month, day, year] = dateString.split("-");
@@ -44,6 +63,23 @@ export default async function fetchThisWeek(request, response) {
     event.weekday = getDayOfWeek(event.date);
     event.alarm = false;
 
+    const dateObject = parseToDateObject(event.date, event.time);
+    const dateObjectMinusTwoMinutes = new Date(
+      dateObject.getTime() - 2 * 60 * 1000
+    );
+    event.alarmTime = dateObjectMinusTwoMinutes.toLocaleString("en", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "Etc/GMT-4",
+    });
+    event.berlinTime = dateObject.toLocaleString("en", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "Etc/GMT-4",
+    });
+    event.dateObjectString = dateObject.toISOString();
     return event;
   });
 

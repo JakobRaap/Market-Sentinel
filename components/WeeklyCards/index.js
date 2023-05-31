@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import WeeklyCard from "../WeeklyCard";
-import { uid } from "uid";
 const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -12,7 +11,12 @@ const StyledDateHeading = styled.h4`
   padding-left: 20px;
 `;
 
-export default function WeeklyCards({ events, onToggleAlarm, showWeekDay }) {
+export default function WeeklyCards({
+  events,
+  onToggleAlarm,
+  showWeekDay,
+  settings,
+}) {
   return (
     <>
       <StyledDateHeading>{events[0].weekday}</StyledDateHeading>
@@ -20,10 +24,11 @@ export default function WeeklyCards({ events, onToggleAlarm, showWeekDay }) {
         {events.map((event) => {
           return (
             <WeeklyCard
-              key={uid()}
+              key={event.id}
               event={event}
               onToggleAlarm={onToggleAlarm}
               showWeekDay={showWeekDay}
+              settings={settings}
             ></WeeklyCard>
           );
         })}

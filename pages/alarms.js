@@ -1,15 +1,13 @@
 import NavigationBar from "@/components/NavigationBar";
-import TodaysCard from "@/components/TodaysCard";
-import TodaysCards from "@/components/TodaysCards";
-import WeeklyCard from "@/components/WeeklyCard";
 import WeeklyCards from "@/components/WeeklyCards";
+import getEachDaysEvents from "@/components/utils/getEachDaysEvents";
 
-export default function Alarms({ events, onToggleAlarm, getEachDaysEvents }) {
+export default function Alarms({ events, onToggleAlarm, settings }) {
   const alarmEvents = events.filter((event) => event.alarm === true);
   const weekdayEvents = getEachDaysEvents(alarmEvents);
-
   const icsQuery = new URLSearchParams({
     events: JSON.stringify(alarmEvents),
+    settings: JSON.stringify(settings),
   });
 
   return (
@@ -29,30 +27,35 @@ export default function Alarms({ events, onToggleAlarm, getEachDaysEvents }) {
             <WeeklyCards
               events={weekdayEvents.monday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
           {weekdayEvents.tuesday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.tuesday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
           {weekdayEvents.wednesday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.wednesday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
           {weekdayEvents.thursday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.thursday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
           {weekdayEvents.friday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.friday}
               onToggleAlarm={onToggleAlarm}
+              settings={settings}
             />
           )}
         </>
