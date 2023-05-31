@@ -82,42 +82,6 @@ export default async function fetchThisWeek(request, response) {
     event.dateObjectString = dateObject.toISOString();
     return event;
   });
-  const customEvents = [
-    {
-      id: "xxxxxxxxxxxxxxxxx1232314",
-      country: "AUD",
-      title: "Test Event 1",
-      date: "2022-01-01",
-      berlinTime: "11:11",
-      alarmTime: "13:46",
-      weekday: "Wednesday",
-      impact: "High",
-      dateObjectString: "2023-05-31T07:00:00.000Z",
-    },
-    {
-      id: "xxxxxxxxxxxx123123",
-      country: "USD",
-      title: "FOMC Testevent",
-      date: "2022-01-01",
-      berlinTime: "11:11",
-      alarmTime: "13:48",
-      weekday: "Wednesday",
-      impact: "High",
-      dateObjectString: "2023-05-31T07:00:00.000Z",
-    },
-    {
-      id: "xxxxxxx1233",
-      country: "EUR",
-      title: "Test Event 3",
-      date: "2022-01-01",
-      berlinTime: "11:11",
-      alarmTime: "13:48",
-      weekday: "Wednesday",
-      impact: "High",
-      dateObjectString: "2023-05-31T07:00:00.000Z",
-    },
-  ];
 
-  const testEvents = [...events, ...customEvents];
-  response.status(200).json(testEvents);
+  response.status(200).json(events);
 }
