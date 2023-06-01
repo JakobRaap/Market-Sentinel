@@ -62,7 +62,7 @@ export default function TodaysCard({ event, onToggleAlarm, settings }) {
             src={
               event.alarm
                 ? "/alarmToggledDarkmode.png"
-                : "/alarmUntoggledDarkmode.png"
+                : "/alarmToggledDarkmode.png"
             }
             width={27}
             height={27}
