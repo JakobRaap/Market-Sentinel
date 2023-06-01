@@ -6,18 +6,20 @@ const StyledHeader = styled.header`
   justify-content: center;
   align-items: center;
   text-align: center;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid rgba(140, 139, 139, 0.7);
 `;
 const StyledLink = styled(Link)`
   color: inherit;
   text-decoration: none;
   padding: 10px;
-  ${(props) => props.$withborder && `border-right: 1px solid black;`}
+  ${(props) =>
+    props.$withborder && `border-right: 1px solid rgba(140, 139, 139, 0.7);`}
   ${(props) =>
     props.$active &&
     css`
       font-weight: bold;
-      background-color: #ccc;
+      background-color: rgba(140, 139, 139, 0.7);
+      text-decoration: underline;
     `}
 `;
 export default function CalendarNavigationBar({ page }) {

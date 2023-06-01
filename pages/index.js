@@ -11,7 +11,6 @@ export default function HomePage({ onToggleAlarm, todaysEvents, settings }) {
         onToggleAlarm={onToggleAlarm}
         settings={settings}
       ></TodaysCards>
-      <NavigationBar />
     </div>
   );
 }

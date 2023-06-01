@@ -1,10 +1,7 @@
 import styled from "styled-components";
-const StyledSection = styled.section`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  align-items: center;
-`;
+import { SettingsHeader } from "../DisplaySettings/DisplaySettings.styled";
+import { PreferredCurrenciesContainer } from "./PreferredCurrencies.styled";
+
 const countryFlags = {
   USD: "🇺🇸",
   EUR: "🇪🇺",
@@ -19,17 +16,16 @@ const countryFlags = {
 export default function PreferredCurrencies({ changeSettings, settings }) {
   return (
     <>
-      <h1>Settings</h1>
-      <h4>
+      <SettingsHeader>
         Show preferred currencies only:
         <input
           type="checkbox"
           onChange={() => changeSettings("preferredCurrenciesToggle")}
           checked={settings.flagsTurnedOn}
         ></input>
-      </h4>
+      </SettingsHeader>
 
-      <StyledSection>
+      <PreferredCurrenciesContainer>
         {Object.entries(countryFlags).map(([currencyCode, emoji]) => (
           <label key={currencyCode}>
             <input
@@ -41,7 +37,7 @@ export default function PreferredCurrencies({ changeSettings, settings }) {
             {emoji} {currencyCode}
           </label>
         ))}
-      </StyledSection>
+      </PreferredCurrenciesContainer>
     </>
   );
 }

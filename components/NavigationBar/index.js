@@ -10,9 +10,7 @@ const StyledFooter = styled.footer`
   right: 0;
   height: 60px;
   justify-content: space-evenly;
-  background-color: white;
-  margin-left: 70px;
-  margin-right: 70px;
+  background-color: rgb(238, 236, 236);
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.7);
 `;
 const StyledImage = styled(Image)`

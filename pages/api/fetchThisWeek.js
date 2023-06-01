@@ -37,6 +37,13 @@ function parseToDateObject(date, time) {
 
   return new Date(year, month, day, hours, minutes);
 }
+function parseToFormattedDate(date) {
+  const day = date.getDate().toString().padStart(2, "0");
+  const month = (date.getMonth() + 1).toString().padStart(2, "0");
+  const year = date.getFullYear().toString();
+  const formattedDate = `${day}.${month}.${year}`;
+  return formattedDate;
+}
 function getDayOfWeek(dateString) {
   //this function turns a date string into its weekday
   const [month, day, year] = dateString.split("-");
@@ -80,6 +87,7 @@ export default async function fetchThisWeek(request, response) {
       timeZone: "Etc/GMT-4",
     });
     event.dateObjectString = dateObject.toISOString();
+    event.formattedDate = parseToFormattedDate(dateObject);
     return event;
   });
 

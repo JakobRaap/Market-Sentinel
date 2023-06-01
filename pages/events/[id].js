@@ -1,5 +1,11 @@
 import CalendarNavigationBar from "@/components/CalendarNavigationBar";
-import NavigationBar from "@/components/NavigationBar";
+import { CenteredHeader2 } from "@/components/DisplaySettings/DisplaySettings.styled";
+import { Placeholder } from "@/components/Placeholder/Placeholder.styled";
+import {
+  CenteredItemContainer,
+  StyledDownloadButton,
+} from "@/components/StyledDownloadButton/StyledDownloadButton.styled";
+
 import { useRouter } from "next/router";
 import styled from "styled-components";
 
@@ -9,8 +15,9 @@ const StyledList = styled.ul`
   margin: 0;
 `;
 const StyledListItem = styled.li`
-  text-align: center;
-  margin: 45px;
+  margin: 30px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 `;
 
 export default function EventDetails({ events, settings }) {
@@ -36,32 +43,37 @@ export default function EventDetails({ events, settings }) {
   return (
     <>
       <CalendarNavigationBar />
-      <h2>{event.title}</h2>
+      <CenteredHeader2>{event.title}</CenteredHeader2>
       <StyledList>
         <StyledListItem>
-          Currency: {event.country} {event.flag}
+          <span>Currency:</span> {event.country} {event.flag}
         </StyledListItem>
         <StyledListItem>
-          Date: {event.weekday} {event.date}
-        </StyledListItem>
-        <StyledListItem>Time: {event.time}</StyledListItem>
-        <StyledListItem>Impact: {event.impact}</StyledListItem>
-        <StyledListItem>
-          Previous: {event.previous ? event.previous : "unknown"}
+          <span>Date:</span> {event.weekday} {event.formattedDate}
         </StyledListItem>
         <StyledListItem>
-          Forecast: {event.forecast ? event.forecast : "unknown"}
+          <span>Time:</span> {event.berlinTime}
         </StyledListItem>
         <StyledListItem>
-          <a
-            href={`/api/event.ics?${icsQuery.toString()}`}
-            download={`${event.id}.ics`}
-          >
-            Add to Calendar
-          </a>
+          <span>Impact:</span> {event.impact}
+        </StyledListItem>
+        <StyledListItem>
+          <span>Previous:</span> {event.previous ? event.previous : "unknown"}
+        </StyledListItem>
+        <StyledListItem>
+          <span>Forecast:</span> {event.forecast ? event.forecast : "unknown"}
         </StyledListItem>
       </StyledList>
-      <NavigationBar />
+      <CenteredItemContainer>
+        <a
+          href={`/api/event.ics?${icsQuery.toString()}`}
+          download={`${event.id}.ics`}
+        >
+          <StyledDownloadButton>Download Event</StyledDownloadButton>
+        </a>
+      </CenteredItemContainer>
+
+      <Placeholder />
     </>
   );
 }
