@@ -10,6 +10,7 @@ import {
 } from "./TodaysCard.styled";
 
 export default function TodaysCard({ event, onToggleAlarm, settings }) {
+  console.log(event);
   return (
     <>
       <StyledListItem>

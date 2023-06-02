@@ -46,7 +46,7 @@ export default function WeeklyCard({ event, onToggleAlarm, settings }) {
       )}
       <Image
         onClick={() => onToggleAlarm(event.id, true)}
-        alt="img not found :("
+        alt="alarm bell toggle icon"
         src={
           event.alarm
             ? "/alarmToggledDarkmode.png"
