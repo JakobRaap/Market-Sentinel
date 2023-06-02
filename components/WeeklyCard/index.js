@@ -50,7 +50,7 @@ export default function WeeklyCard({ event, onToggleAlarm, settings }) {
         src={
           event.alarm
             ? "/alarmToggledDarkmode.png"
-            : "/alarmUnToggledDarkmode.png"
+            : "/alarmUntoggledDarkmode.png"
         }
         width={15}
         height={15}
