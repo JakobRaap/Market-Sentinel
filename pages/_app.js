@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import useLocalStorageState from "use-local-storage-state";
 import AlarmTimer from "@/components/AlarmTimer";
 import useSound from "use-sound";
+import NavigationBar from "@/components/NavigationBar";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const soundUrl = "./alarmtogglesound.mp3";
@@ -138,6 +139,7 @@ export default function App({ Component, pageProps }) {
         onToggleAlarm={handleToggleAlarm}
         todaysEvents={filterTodaysEvents(eventsToShow)}
       />
+      <NavigationBar />
     </>
   );
 }

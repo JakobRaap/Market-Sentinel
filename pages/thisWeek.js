@@ -1,5 +1,6 @@
 import CalendarNavigationBar from "@/components/CalendarNavigationBar";
 import NavigationBar from "@/components/NavigationBar";
+import { Placeholder } from "@/components/Placeholder/Placeholder.styled";
 import WeeklyCards from "@/components/WeeklyCards";
 import getEachDaysEvents from "@/components/utils/getEachDaysEvents";
 
@@ -49,8 +50,7 @@ export default function ThisWeek({ events, onToggleAlarm, settings }) {
           )}
         </>
       )}
-
-      <NavigationBar />
+      <Placeholder /> <Placeholder />
     </>
   );
 }

@@ -11,6 +11,7 @@ export default function TimerComponent({ todaysEvents, onToggleAlarm }) {
     msg.voice = voices[14];
     msg.volume = 1;
     msg.rate = 0.78;
+    msg.lang = "en";
     msg.text = `Attention - ${eventNames}  upcoming. Two minutes remaining. Prepare to exit any open positions.`;
     speechSynthesis.speak(msg);
   }

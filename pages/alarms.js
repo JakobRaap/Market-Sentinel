@@ -1,4 +1,10 @@
+import { CenteredHeader1 } from "@/components/DisplaySettings/DisplaySettings.styled";
 import NavigationBar from "@/components/NavigationBar";
+import { Placeholder } from "@/components/Placeholder/Placeholder.styled";
+import {
+  CenteredItemContainer,
+  StyledDownloadButton,
+} from "@/components/StyledDownloadButton/StyledDownloadButton.styled";
 import WeeklyCards from "@/components/WeeklyCards";
 import getEachDaysEvents from "@/components/utils/getEachDaysEvents";
 
@@ -13,16 +19,10 @@ export default function Alarms({ events, onToggleAlarm, settings }) {
   return (
     <>
       {alarmEvents.length === 0 ? (
-        <h1>No Alarms</h1>
+        <CenteredHeader1>No Alarms</CenteredHeader1>
       ) : (
         <>
-          <h1>Toggled Events</h1>{" "}
-          <a
-            href={`/api/events.ics?${icsQuery.toString()}`}
-            download={`EconCalendarEvents.ics`}
-          >
-            Add to Calendar
-          </a>
+          <CenteredHeader1>Toggled Events</CenteredHeader1>{" "}
           {weekdayEvents.monday.length > 0 && (
             <WeeklyCards
               events={weekdayEvents.monday}
@@ -58,9 +58,19 @@ export default function Alarms({ events, onToggleAlarm, settings }) {
               settings={settings}
             />
           )}
+          <CenteredItemContainer>
+            {" "}
+            <a
+              href={`/api/events.ics?${icsQuery.toString()}`}
+              download={`EconCalendarEvents.ics`}
+            >
+              <StyledDownloadButton>Download Events</StyledDownloadButton>
+            </a>
+          </CenteredItemContainer>
         </>
       )}
-      <NavigationBar />
+
+      <Placeholder />
     </>
   );
 }

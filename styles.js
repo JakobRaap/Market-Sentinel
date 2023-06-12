@@ -8,9 +8,10 @@ export default createGlobalStyle`
   }
 
   body {
+    color: white;
     margin: 0;
     font-family: system-ui;
-    background-color: #fafafa;
+    background: linear-gradient(to right, #444, #333);
   
   }
 `;
